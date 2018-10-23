@@ -42,7 +42,7 @@ function doUploadImg(elForm, onSuccess) {
 }
 
 function handleImageFromInput(ev, onImageReady) {
-    document.querySelector('.share-container').innerHTML = ''
+    // document.querySelector('.share-container').innerHTML = ''
     var reader = new FileReader();
 
     reader.onload = function (event) {

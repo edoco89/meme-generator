@@ -14,7 +14,7 @@
             <h1 class="logo-top">Meme Generator</h1>
             <button onclick="toggleMenu()" class="btn-hamburger">☰</button>
             <section class="btn-top-container">
-                <a class="btn-top" href="">Gallery</a>
+                <a class="btn-top" onclick="onGalleryClick()">Editor</a>
                 <a class="btn-top" href="">About</a>
                 <a class="btn-top" href="">Get in touch</a>
             </section>
@@ -23,21 +23,27 @@
 
     <main>
         <div class="gallery-container">
-            
- 
+            <div class="gallery"></div>
+            <input type="file" name="image" onchange="onFileInputChange(event)" />
         </div>
 
         <div class="editor-container hide">
             <nav class="edit-menu">
-                <input id="txt-add" placeholder="input text" type="text" onkeyup="drawCanvas()">
+                <input id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas()">
+                <input id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas()">
                 <button id="clear-btn" onclick="clearCanvas()">Clear</button>
+                <input onchange="setColor(this.value)" type="color" value="#ffffff">
 
+                <button id="clear-btn" onclick="clearCanvas()">Clear</button>
+                <a onclick="saveCanvas(this)">Save Image</a>
+                <div class="publish-form-container"></div>
+                
             </nav>
             <canvas class="canvas" id="canvas" onmousedown="handleCanvasClick(event)"></canvas>
         </div>        
     </main>
 
-
+    <script src="upload-and-share/client/js/upload-service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/gallery-service.js"></script>

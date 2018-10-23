@@ -23,5 +23,7 @@ function setColor(color) {
     gColor = color;
 }
 
-
+function getColor(){
+    return gColor;
+}
 
