@@ -1,7 +1,16 @@
-var gColor;
+var gColor = '#ffffff';
 var gPrevX = 0;
 var gPrevY = 0;
 var gPrevTimeStemp;
+var gMeme = {
+    selectedImg: null,
+    txts: [
+{
+line: 'I never eat Falafel', size: 20,
+align: 'left',
+color: 'red'
+}
+] }
 
 
 function setInitialCoords(x, y) {
@@ -27,3 +36,10 @@ function getColor(){
     return gColor;
 }
 
+function setImgBackground(img) {
+    gMeme.selectedImg = img;
+}
+
+function getImgBackground() {
+    return gMeme.selectedImg;
+}

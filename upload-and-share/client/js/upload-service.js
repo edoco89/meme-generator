@@ -13,7 +13,7 @@ function uploadImg(elForm, ev) {
         console.log('uploadedImgId', uploadedImgId);
 
         var urlForShare = SHARE_URL + uploadedImgId;
-        //var imgUrl      = UPLOADED_IMG_URL + uploadedImgId;
+        // var imgUrl      = UPLOADED_IMG_URL + uploadedImgId;
 
         urlForShare = encodeURIComponent(urlForShare)
         document.querySelector('.share-container').innerHTML = `

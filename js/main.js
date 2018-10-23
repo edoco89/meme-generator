@@ -22,15 +22,22 @@ function drawCanvas() {
     gCanvas.height = document.body.clientHeight;
     gCanvasBackground();
     gCtx = canvas.getContext('2d');
-    onTextAdd(document.getElementById('txt-top"').value);
+    onTextAdd(document.getElementById('txt-top').value);
     onTextAdd(document.getElementById('txt-bottom').value);
+    console.dir(gCanvas);
 }
 
 function onTextAdd(txt) {
     gCtx.beginPath();
-    gCtx.font = "30px Arial";
-    gCtx.fillText(txt, 10, 50);
-    gCtx.stroke();
+    gColor = getColor();
+    gCtx.strokeStyle= "black";
+    gCtx.fillStyle = gColor;
+    gCtx.textAlign = "center";
+    gCtx.font = "40px Arial";
+    gCtx.fillText(txt, gCanvas.width / 2 , 50, gCanvas.width);
+    gCtx.strokeText(txt, gCanvas.width / 2 , 50, gCanvas.width);
+    // gCanvas.height
+    // gCtx.stroke();
 }
 
 function onTextDone() {
@@ -44,8 +51,9 @@ function clearCanvas() {
     gCtx = null;
     gCtx = gCanvas.getContext('2d');
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-    gCurrentTxtPos = 1;
-    // gCtx.fillStyle = 'white';
+    gCanvasBackground();
+    document.getElementById('txt-top').value = '';
+    document.getElementById('txt-bottom').value = '';
 }
 
 function saveCanvas(elLink) {
@@ -54,7 +62,6 @@ function saveCanvas(elLink) {
     elLink.href = imgContent;
     elLink.download = 'my-canvas.jpg';
 }
-
 
 
 //button hamburger toggle
@@ -85,7 +92,9 @@ function imageToCanvas(imgUrl) {
         canvas.height = img.height;
         gCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
     }
+    drawCanvas();
 }
+
 
 function onGalleryClick() {
     document.querySelector('.gallery-container').classList.toggle('hide');
@@ -94,13 +103,15 @@ function onGalleryClick() {
 }
 
 // upload Image
-function onFileInputChange(ev) {
-    handleImageFromInput(ev, renderCanvas);
-}
+// function onFileInputChange(ev) {
+//     handleImageFromInput(ev, imageToCanvas);
+// }
 
-function renderCanvas(img) {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    gCtx.drawImage(img, 0, 0);
-    onGalleryClick();
-}
+// function renderCanvas(img) {
+//     console.log(img)
+    // imageToCanvas(img.url);
+    // canvas.width = img.width;
+    // canvas.height = img.height;
+    // gCtx.drawImage(img, 0, 0);
+//     onGalleryClick();
+// }
