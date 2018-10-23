@@ -18,5 +18,5 @@ function onFileInputChange(ev) {
 
 function downloadImg(elLink) {
     var imgContent = canvas.toDataURL('image/jpeg');
-    elLink.href = imgContent
+    elLink.href = imgContent;
 }

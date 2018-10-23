@@ -1,6 +1,6 @@
 var gCanvas;
 var gCtx;
-var gCurrentTxtPos = 1;
+var gCanvasBackground;
 
 
 function init() {
@@ -16,15 +16,27 @@ function handleCanvasClick(ev) {
     setLastTimestamp(ev.timeStamp);
 }
 
-function onTextAdd(txt, ev) {
+function drawCanvas(){
+    gCanvas = document.querySelector('#canvas');
+    gCanvas.width = document.body.clientWidth;
+    gCanvas.height = document.body.clientHeight;
+    gCanvasBackground();
+    gCtx = canvas.getContext('2d');
+    onTextAdd(document.getElementById('txt-add').value);
+}
+
+function onTextAdd(txt) {
     gCtx.beginPath();
     gCtx.font = "30px Arial";
-    gCtx.fillText(txt , 10, gCurrentTxtPos * 50);
+    gCtx.fillText(txt , 10, 50);
+    gCtx.stroke();
+}
+
+function onTextDone() {
     gCurrentTxtPos++;
     var txtInput = document.getElementById('txt-add');
     txtInput.value = '';
-    gCtx.stroke();
-    // gCtx.closePath();
+
 }
 
 function clearCanvas() {
@@ -56,6 +68,8 @@ function renderGallery(){
 }
 
 function onImgClick(urlImg){
+    gCanvasBackground = urlImg;
+    imageToCanvas(urlImg);
     document.querySelector('.gallery-container').classList.add('hide');
     document.querySelector('.editor-container').classList.remove('hide');
 }
@@ -63,7 +77,7 @@ function onImgClick(urlImg){
 function imageToCanvas(imgUrl) {
     var img = new Image();
     img.src = imgUrl;
-    img.onload = function() {
-        gCtx.drawImage(img, 0, 0 ,canvas.width, canvas.height)
+    gCanvasBackground = img.onload = function() {
+        gCtx.drawImage(img, 0, 0 ,canvas.width, canvas.height);
     }
 }
