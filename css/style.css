@@ -9,6 +9,7 @@ html, body {
 *, *:after, *:before {
     box-sizing: inherit;
 }
+
 h1{
     margin: 0;
 }
@@ -48,9 +49,10 @@ h1{
 @media screen and (min-width: 700px) {
 
 
-
+}
 
 canvas {
     border: 1px black solid;
     background-color: white;
 }
+
