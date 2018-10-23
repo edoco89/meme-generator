@@ -84,9 +84,6 @@ h1{
     }
 }
 
-.editor-container{
-    display: none;
-}
 
 canvas {
     
@@ -103,3 +100,6 @@ canvas {
     width: 300px;
 }
 
+.hide{
+    display: none;
+}

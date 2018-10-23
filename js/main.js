@@ -24,7 +24,7 @@ function onTextAdd(txt, ev) {
     var txtInput = document.getElementById('txt-add');
     txtInput.value = '';
     gCtx.stroke();
-    gCtx.closePath();
+    // gCtx.closePath();
 }
 
 function clearCanvas() {
@@ -57,4 +57,7 @@ function renderGallery(){
 
 function onImgClick(urlImg){
     console.log(urlImg);
+    document.querySelector('.gallery-container').classList.add('hide');
+    document.querySelector('.editor-container').classList.remove('hide');
+
 }
