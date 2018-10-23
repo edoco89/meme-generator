@@ -51,6 +51,7 @@ function handleImageFromInput(ev, onImageReady) {
         img.src = event.target.result;
     }
     reader.readAsDataURL(ev.target.files[0]);
+    console.log(reader);
 }
 
 
@@ -64,7 +65,7 @@ function handleImageFromInput(ev, onImageReady) {
     document.querySelector('.publish-form-container').innerHTML = 
         `<form class="publish-form" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
             <input name="img" id="imgData" type="hidden"/>
-            <button type="submit" class="publish-btn">Publish</button>
+            <button type="submit" class="publish-btn btn-imp">Publish</button>
         </form>`
 
     if (!document.querySelector('.share-container')) {

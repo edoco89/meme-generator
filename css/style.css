@@ -4,6 +4,7 @@ html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: aliceblue;
 }
 
 *, *:after, *:before {
@@ -102,6 +103,63 @@ canvas {
 }
 
 
+
+
+
+/* editor */
+.editor-container{
+    display: flex;
+
+}
+.edit-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2eb398;
+
+
+}
+.input-txt-editor{
+    min-height: 30px;
+    max-height: 50px;
+    min-width: 300px;
+}
+
+.bts-imp-container{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.btn-imp{
+    border-radius: 4px;
+    background-image: -moz-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
+    background-image: -webkit-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
+    background-image: -ms-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
+    width: 300px;
+    font-size: 20px;
+    text-align: center;
+}
+/* modal icons */
+.icons-modal{
+    width: 87px;
+    height: 400px;
+    background-color: #2eb398;
+    position: fixed;
+    top: 122px;
+    left: 319px;
+    text-align: center;
+}
+.emoji{
+    font-size: 30px;
+    cursor: pointer;
+}
+.emoji:hover{
+    font-size: 35px;
+}
+
 .hide{
     display: none;
 }
+

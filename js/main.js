@@ -22,8 +22,13 @@ function drawCanvas() {
     gCanvas.height = document.body.clientHeight;
     gCanvasBackground();
     gCtx = canvas.getContext('2d');
-    onTextAdd(document.getElementById('txt-top"').value);
+    onTextAdd(document.getElementById('txt-top').value);
     onTextAdd(document.getElementById('txt-bottom').value);
+
+    var emojis = getEmoji();
+    if (emojis) {
+        onEmojiAdd(emojis);
+    }
 }
 
 function onTextAdd(txt) {
@@ -31,6 +36,15 @@ function onTextAdd(txt) {
     gCtx.font = "30px Arial";
     gCtx.fillText(txt, 10, 50);
     gCtx.stroke();
+}
+
+function onEmojiAdd(emojis) {
+    emojis.forEach(emoji => {
+        gCtx.beginPath();
+        gCtx.font = "30px Arial";
+        gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
+        gCtx.stroke();
+    });
 }
 
 function onTextDone() {
@@ -103,4 +117,18 @@ function renderCanvas(img) {
     canvas.height = img.height;
     gCtx.drawImage(img, 0, 0);
     onGalleryClick();
+}
+
+// open modal emoji
+function onBtnEmoji() {
+    document.querySelector('.icons-modal').classList.toggle('hide');
+}
+function openEmojiModal(ev) {
+    document.querySelector('.icons-modal').classList.toggle('hide');
+    saveEmojiPos(ev);
+}
+
+function onEmojiClick(emoji) {
+    // console.dir(emoji);
+    saveEmoji(emoji);
 }

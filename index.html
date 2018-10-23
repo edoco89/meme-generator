@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Meme Generator</title>
 </head>
+
 <body onload="init()">
-    
+
     <header>
         <nav class="top-bar">
             <h1 class="logo-top">Meme Generator</h1>
@@ -29,24 +31,38 @@
 
         <div class="editor-container hide">
             <nav class="edit-menu">
-                <input id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas()">
-                <input id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas()">
-                <button id="clear-btn" onclick="clearCanvas()">Clear</button>
+                <input class="input-txt-editor" id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas()">
+                <input class="input-txt-editor" id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas()">
+                <button>Add more text</button>
                 <input onchange="setColor(this.value)" type="color" value="#ffffff">
 
-                <button id="clear-btn" onclick="clearCanvas()">Clear</button>
-                <a onclick="saveCanvas(this)">Save Image</a>
-                <div class="publish-form-container"></div>
-                
+                <button onclick="onBtnEmoji()">Add emoji</button>
+
+                <div class="bts-imp-container">
+                    <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
+                    <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
+                    <div class="publish-form-container"></div>
+                </div>
             </nav>
-            <canvas class="canvas" id="canvas" onmousedown="handleCanvasClick(event)"></canvas>
-        </div>        
+            <canvas class="canvas" id="canvas" onclick="openEmojiModal(event)" onmousedown="handleCanvasClick(event)"></canvas>
+        </div>
+
+        <div class="icons-modal hide">
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+        
+        </div>
+
     </main>
 
     <script src="upload-and-share/client/js/upload-service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/gallery-service.js"></script>
+    <script src="js/emoji-service.js"></script>
     <script src="js/util-service.js"></script>
 </body>
+
 </html>
