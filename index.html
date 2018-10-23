@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Meme Generator</title>
 </head>
-<body>
+<body onload="init()">
     
     <header>
         <nav class="top-bar">
@@ -27,16 +27,17 @@
 
         <div class="editor-container">
             <nav class="edit-menu">
-                <input placeholder="input text" type="text" onchange="onInputAdd(this.value)">
+                <input placeholder="input text" type="text" onchange="onTextAdd(this.value)">
+                <button id="clear-btn" onclick="clearCanvas()">Clear</button>
 
             </nav>
-            <canvas></canvas>
+            <canvas class="canvas" id="canvas" onmousedown="handleCanvasClick(event)"></canvas>
         </div>        
     </main>
 
 
     <script src="js/main.js"></script>
     <script src="js/meme-service.js"></script>
-    <script src="js/util-service"></script>
+    <script src="js/util-service.js"></script>
 </body>
 </html>
