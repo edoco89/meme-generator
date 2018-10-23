@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    
+  <style>
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .social-share-btn {
+      background: #4267b2;
+      border: 1px solid #4267b2;
+      color: #fff;
+      cursor: pointer;
+      font-family: Helvetica, Arial, sans-serif;
+      margin: 0;
+      user-select: none;
+      white-space: nowrap;
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 11px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .publish-btn {
+      background: #42b263;
+      border: 1px solid #42b263;
+      color: #fff;
+      cursor: pointer;
+      font-family: Helvetica, Arial, sans-serif;
+      margin: 0;
+      user-select: none;
+      white-space: nowrap;
+      padding: 5px 10px;
+      border-radius: 3px;
+      text-decoration: none;
+      /* display: inline-block; */
+    }
+  </style>
+</head>
+
+<body onload="init()">
+
+  <input type="file" name="image" onchange="onFileInputChange(event)" />
+    
+  <div class="publish-form-container"></div>
+
+  <hr>
+  <br>
+  <canvas id="myCanvas" width="400" height="400" style="outline:1px solid green"></canvas>
+  
+  <br>
+  <a href="#" onclick="downloadImg(this)" download="my-img.jpg" >
+    Download as jpeg
+  </a>
+  
+  <br>
+
+  <script src="js/upload-service.js"></script>
+  <script src="js/main.js"></script>
+ 
+</body>
+
+</html>
