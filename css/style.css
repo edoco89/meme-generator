@@ -1,0 +1,46 @@
+*{
+    box-sizing: border-box;
+}
+html,body{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    margin: 0;
+}
+
+.top-bar{
+    height: 100px;
+    background-color: rgb(47, 54, 48);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.logo-top{
+    color: #2eb398;
+    font-size: 45px;
+    font-family: cursive;
+}
+
+
+.btn-container{
+
+}
+
+.btn-top{
+    text-decoration: none;
+    color: white;
+    margin-left: 10px;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.btn-top:hover{
+    color: #2eb398;
+
+}
+
+@media screen and (min-width: 700px) {
+
+}
