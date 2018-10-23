@@ -58,3 +58,11 @@ function renderGallery(){
 function onImgClick(urlImg){
     console.log(urlImg);
 }
+
+function imageToCanvas(imgUrl) {
+    var img = new Image();
+    img.src = imgUrl;
+    img.onload = function() {
+        gCtx.drawImage(img, 0, 0 ,canvas.width, canvas.height)
+    }
+}
