@@ -28,11 +28,31 @@ h1{
     font-family: cursive;
 }
 
-
-.btn-container{
-
+.btn-hamburger{
+    margin: 0;
+    border: 0;
+    font-size: 40px;
+    color: white;
+    background: none;
+}
+.btn-hamburger:hover{
+    cursor: pointer;
+    color: #2eb398;
 }
 
+.btn-top-container{
+    background-color: #2eb398;
+    width: 100%;
+    flex-direction: column;
+    position: fixed;
+    top: 100px;
+    text-align: center;
+    display: none;
+}
+.open-btn{
+    display: flex;
+
+}
 .btn-top{
     text-decoration: none;
     color: white;
@@ -41,16 +61,44 @@ h1{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn-top:hover{
-    color: #2eb398;
+    color: rgb(47, 54, 48);
 
 }
 
 @media screen and (min-width: 700px) {
+    .btn-top-container{
+        background: none;
+        flex-direction: row;
+        position: initial;
+        text-align: center;
+        display: flex;
+        width: initial;
 
+    }
+    .btn-top:hover{
+        color: #2eb398;
+    }
+    .btn-hamburger{
+        display: none;
+    }
+}
 
-
+.editor-container{
+    display: none;
+}
 
 canvas {
+    
     border: 1px black solid;
     background-color: white;
 }
+
+
+/* gallery */
+
+.img-gallery{
+    -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    width: 300px;
+}
+

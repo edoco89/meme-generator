@@ -7,6 +7,7 @@ function init() {
     gCanvas.width = document.body.clientWidth;
     gCanvas.height = document.body.clientHeight;
     gCtx = canvas.getContext('2d');
+    renderGallery();
 }
 
 function handleCanvasClick(ev) {
@@ -31,3 +32,21 @@ function saveCanvas(elLink) {
     elLink.download = 'my-canvas.jpg';
 }
 
+
+//button hamburger toggle
+function toggleMenu() {
+    document.querySelector('.btn-top-container').classList.toggle('open-btn');
+}
+
+
+function renderGallery(){
+    var imgs = getGallery();
+    var strHTML = imgs.map(img => {
+        return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
+    },[]);
+    document.querySelector('.gallery-container').innerHTML = strHTML.join('');
+}
+
+function onImgClick(urlImg){
+    console.log(urlImg);
+}
