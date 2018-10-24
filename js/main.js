@@ -8,7 +8,8 @@ function init() {
     // gCanvas.width = document.body.clientWidth;
     // gCanvas.height = document.body.clientHeight;
     gCtx = canvas.getContext('2d');
-    renderGallery();
+    createGallery();
+    renderGallery(getGallery());
 }
 
 function handleCanvasClick(ev) {
@@ -81,9 +82,22 @@ function toggleMenu() {
     document.querySelector('.btn-top-container').classList.toggle('open-btn');
 }
 
+//gallery
+function onFilter(val){
+    // debugger;
+    if(val){
+        var filterdImages = searchKey(val);
+        if(!filterdImages){
+            renderGallery(getGallery());
+        }else{
+            renderGallery(filterdImages);
+        }
+    } else {
+        renderGallery(getGallery());
+    }
+}
 
-function renderGallery() {
-    var imgs = getGallery();
+function renderGallery(imgs) {
     var strHTML = imgs.map(img => {
         return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
     }, []);
@@ -137,5 +151,8 @@ function openEmojiModal(ev) {
 
 function onEmojiClick(emoji) {
     // console.dir(emoji);
+    document.querySelector('.icons-modal').classList.toggle('hide');
     saveEmoji(emoji);
 }
+
+

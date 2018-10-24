@@ -25,6 +25,10 @@
 
     <main>
         <div class="gallery-container">
+            <div class="filter-container">
+                <input onchange="onFilter(this.value)" class="filter-input" type="text">
+                <div class="filter-words"></div>
+            </div>
             <div class="gallery"></div>
             <input type="file" name="image" onchange="onFileInputChange(event)" />
         </div>
@@ -51,11 +55,14 @@
         </div>
 
         <div class="icons-modal hide">
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-        
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
         </div>
 
     </main>
