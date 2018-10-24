@@ -17,7 +17,7 @@
             <button onclick="toggleMenu()" class="btn-hamburger">☰</button>
             <section class="btn-top-container">
                 <a class="btn-top" onclick="onGalleryClick()">Editor</a>
-                <a class="btn-top" href="">About</a>
+                <a class="btn-top" onclick="onAbout()">About</a>
                 <a class="btn-top" href="">Get in touch</a>
             </section>
         </nav>
@@ -25,12 +25,12 @@
 
     <main>
         <div class="gallery-container">
-            <div class="filter-container">
+            <div class="filter-container flex-center">
                 <input class="input-keyword" placeholder="search keyword" onkeyup="onFilter(this.value)" class="filter-input" type="text">
-                <div class="filter-words"></div>
             </div>
+            <div class="filter-words flex-center"></div>
             <div class="gallery"></div>
-            <input type="file" name="image" onchange="onFileInputChange(event)" />
+            <input id="upload-input" type="file" name="image" onchange="onFileInputChange(event)" />
         </div>
 
         <div class="editor-container hide">
@@ -83,6 +83,11 @@
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
         </div>
+
+        <div class="contact-modal hide">
+            <h2>Created By Edo Cohen and Tom Manger</h2>
+        </div>
+
 
     </main>
     <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
