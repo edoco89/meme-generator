@@ -31,11 +31,10 @@ function drawCanvas(elInput) {
     meme.txts.forEach(txt => {
         drawTxt(txt);
     });
-    console.dir(canvas);
-    // var emojis = getEmoji();
-    // if (emojis) {
-    //     onEmojiAdd(emojis);
-    // }
+    var emojis = getEmoji();
+    if (emojis) {
+        onEmojiAdd(emojis);
+    }
 }
 
 function drawTxt(txt) {
