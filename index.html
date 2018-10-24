@@ -35,20 +35,20 @@
 
         <div class="editor-container hide">
             <nav class="edit-menu">
-                <div class="txt-top-container">
-                    <input class="input-txt-editor txt-top" id="txt-top" placeholder="top text" type="text" oninput="drawCanvas(this, event)"
-                        maxlength="30">
-                    <input id="txt-top" onchange="onTxtColor(this)" type="color" value="#ffffff">
-                    <input id="txt-top" onchange="onTxtStroke(this)" type="color" value="#000000">
+                <div class="txt-container">
+                    <input class="input-txt-editor"  placeholder="writ here..." type="text" oninput="onSetTxt(this.value)">
+                    <input id="txt-top" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
+                    <input id="txt-top" onchange="onTxtStroke(this.value)" type="color" value="#000000">
                     <div class="txt-top-align">
-                        <button onclick="onTxtAlign(this)" class="txt-align-left" id="txt-top" value="left">Left</button>
-                        <button onclick="onTxtAlign(this)" class="txt-align-center" id="txt-top" value="center">Center</button>
-                        <button onclick="onTxtAlign(this)" class="txt-align-Right" id="txt-top" value="right">Right</button>
+                        <button onclick="onTxtAlign(this.value)" class="txt-align-left"  value="left">Left</button>
+                        <button onclick="onTxtAlign(this.value)" class="txt-align-center"  value="center">Center</button>
+                        <button onclick="onTxtAlign(this.value)" class="txt-align-Right"  value="right">Right</button>
                     </div>
+                    <button class="add-txt" onclick="onAddText()">Add Text</button>
                 </div>
-                <div class="txt-bottom-container">
+                <!-- <div class="txt-bottom-container">
                     <input class="input-txt-editor txt-bottom" id="txt-bottom" placeholder="bottom text" type="text"
-                        oninput="drawCanvas(this, event)" >
+                        oninput="onSetTxt(this)" >
                     <input id="txt-bottom" onchange="onTxtColor(this)" type="color" value="#ffffff">
                     <input id="txt-bottom" onchange="onTxtStroke(this)" type="color" value="#000000">
                     <div class="txt-bottom-align">
@@ -56,8 +56,7 @@
                         <button onclick="onTxtAlign(this)" class="txt-align-center" id="txt-bottom" value="center">Center</button>
                         <button onclick="onTxtAlign(this)" class="txt-align-Right" id="txt-bottom" value="right">Right</button>
                     </div>
-                </div>
-                <button>Add more text</button>
+                </div> -->
                 <a onclick="saveCanvas(this)">Save Image</a>
                 <div class="publish-form-container"></div>
 

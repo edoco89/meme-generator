@@ -6,9 +6,8 @@ var gMouseY;
 var gStartX;
 var gStartY;
 var gSelectedTextIdx = -1;
-var gCanvasOffset;
-var $canvas;
 var gSelectedText;
+var gCurrentInput;
 
 
 function init() {
@@ -21,10 +20,9 @@ function initMeme() {
     gCanvas = document.querySelector('#canvas');
     gCtx = canvas.getContext('2d');
     var meme = getMeme();
-    $canvas = $("#canvas");
     gCanvas.width = meme.selectedImg.width;
     gCanvas.height = meme.selectedImg.height;
-    gCanvasOffset = $canvas.offset();
+    gCurrentInput = meme.txts[0];
 }
 
 function handleCanvasClick(ev) {
@@ -32,11 +30,9 @@ function handleCanvasClick(ev) {
     setLastTimestamp(ev.timeStamp);
 }
 
-function drawCanvas(elInput, ev) {
+function drawCanvas() {
     var meme = getMeme();
     meme.selectedImg.onload();
-    setText(elInput.id, elInput.value);
-    // setTxtCoords(elInput.id, ev.offsetX, ev.offsetY);
     meme.txts.forEach(text => {
         text.width = gCtx.measureText(text.text).width;
         text.height = text.size;
@@ -49,6 +45,11 @@ function drawCanvas(elInput, ev) {
     });
     var emojis = getEmojis();
     if (emojis) onEmojiAdd(emojis);
+}
+
+function onSetTxt(txt) {
+    setText(gCurrentInput.id, txt);
+    drawCanvas();
 }
 
 function onEmojiAdd(emojis) {
@@ -81,6 +82,14 @@ function saveCanvas(elLink) {
 //button hamburger toggle
 function toggleMenu() {
     document.querySelector('.btn-top-container').classList.toggle('open-btn');
+}
+
+function onAddText(){
+    createMeme();
+    var meme = getMeme();
+    gCurrentInput = meme.txts[getInputTxtCount() - 1];
+    console.log(gCurrentInput);
+    document.querySelector('.input-txt-editor').value = '';
 }
 
 //gallery
@@ -207,23 +216,20 @@ function openEmojiModal(ev) {
 }
 
 function onEmojiClick(emoji) {
-    // console.dir(emoji);
     document.querySelector('.icons-modal').classList.toggle('hide');
     saveEmoji(emoji);
     var emojis = getEmojis();
     onEmojiAdd(emojis);
 }
 
-function onTxtColor(elTxtColor) {
-    setTxtColor(elTxtColor.id, elTxtColor.value);
-    var elTxt = document.querySelector(`.${elTxtColor.id}`)
-    drawCanvas(elTxt);
+function onTxtColor(color) {
+    setTxtColor(gCurrentInput.id, color);
+    drawCanvas();
 }
 
-function onTxtStroke(elTxtStroke) {
-    setTxtStroke(elTxtStroke.id, elTxtStroke.value);
-    var elTxt = document.querySelector(`.${elTxtStroke.id}`)
-    drawCanvas(elTxt);
+function onTxtStroke(stroke) {
+    setTxtStroke(gCurrentInput.id, stroke);
+    drawCanvas();
 }
 function onGalleryClick() {
     document.querySelector('.gallery-container').classList.toggle('hide');
@@ -238,10 +244,9 @@ function onFileInputChange(ev) {
 }
 
 
-function onTxtAlign(elTxtAlign) {
-    setTxtPosX(elTxtAlign.id, elTxtAlign.value);
-    var elTxt = document.querySelector(`.${elTxtAlign.id}`)
-    drawCanvas(elTxt);
+function onTxtAlign(align) {
+    setTxtPosX(stroke.id, align);
+    drawCanvas();
 }
 
 function setInitialCoords(x, y) {
@@ -250,36 +255,33 @@ function setInitialCoords(x, y) {
 }
 
 function handleMouseDown(ev) {
-    ev.preventDefault();
-    gStartX = parseInt(ev.clientX - gCanvasOffset.left);
-    gStartY = parseInt(ev.clientY - gCanvasOffset.top);
+    gStartX = parseInt(ev.clientX - gCanvas.offsetLeft);
+    gStartY = parseInt(ev.clientY - gCanvas.offsetTop);
     var texts = getMeme().txts;
     for (var i = 0; i < texts.length; i++) {
-        if (textHitTest(texts[i].text, gStartX, gStartY)) {
+        if (textHitTest(texts[i], gStartX, gStartY)) {
             gSelectedText = texts[i].text;
             gSelectedTextIdx = i;
-            console.log(gSelectedText);
-        }
+            break;
+        } else gSelectedTextIdx = -1;
     }
 }
 
 function handleMouseMove(ev) {
-    if (gSelectedTextIdx < 0) { return; }
-    ev.preventDefault();
-    gMouseX = parseInt(ev.clientX - gCanvasOffset.left);
-    gMouseY = parseInt(ev.clientY - gCanvasOffset.top);
+    if (ev.which !== 1 || gSelectedTextIdx < 0) { return; }
+    gMouseX = parseInt(ev.clientX - gCanvas.offsetLeft);
+    gMouseY = parseInt(ev.clientY - gCanvas.offsetTop);
     var dx = gMouseX - gStartX;
     var dy = gMouseY - gStartY;
     gStartX = gMouseX;
     gStartY = gMouseY;
     var texts = getMeme().txts;
-    console.log(gSelectedText);
-    var text = getTextById(gSelectedText);
-    // console.log(text);
+    var text = texts[gSelectedTextIdx];
+    gCurrentInput = text;
     text.x += dx;
     text.y += dy;
-    var elTxt = document.querySelector(`.${text.id}`)
-    drawCanvas(elTxt);
+    setTxtCords(text.id, text.x, text.y);
+    drawCanvas();
 }
 
 function textHitTest(text, x, y) {
@@ -290,11 +292,9 @@ function textHitTest(text, x, y) {
 }
 
 function handleMouseUp(ev) {
-    ev.preventDefault();
-    gSelectedText = -1;
+    gSelectedTextIdx = -1;
 }
 
 function handleMouseOut(ev) {
-    ev.preventDefault();
-    gSelectedText = -1;
+    gSelectedTextIdx = -1;
 }

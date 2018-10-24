@@ -1,11 +1,11 @@
 
 var gMeme = {};
-var gTxtAddedCount = 0;
 var gPosX = {
     left: 10,
     center: 300,
     right: 600
 }
+var gTxtCount = 1;
 
 const MAX_Y = 500;
 const MIN_Y = 50;
@@ -19,7 +19,7 @@ function createMemes() {
         selectedImg: 'none',
         txts: [
             {
-                id: 'txt-top',
+                id: gTxtCount,
                 text: '',
                 size: 40,
                 align: 'left',
@@ -27,17 +27,18 @@ function createMemes() {
                 stroke: 'black',
                 x: 10,
                 y: 50
-            },
-            {
-                id: 'txt-bottom',
-                text: '',
-                size: 40,
-                align: 'left',
-                color: 'white',
-                stroke: 'black',
-                x: 10,
-                y: canvas.height + 300
             }
+            // ,
+            // {
+            //     id: 'txt-bottom',
+            //     text: '',
+            //     size: 40,
+            //     align: 'left',
+            //     color: 'white',
+            //     stroke: 'black',
+            //     x: 10,
+            //     y: canvas.height + 300
+            // }
         ]
     }
 }
@@ -46,18 +47,20 @@ function createMeme() {
     gTxtCount++;
     gMeme.txts.push(
         {
-            id: `txt-${gTxtCount}`,
+            id: gTxtCount,
             text: '',
-            size: '40px',
+            size: 40,
             align: 'left',
             color: 'white',
             stroke: 'black',
-            x: canvas.width / 2,
-            y: canvas.height + 300
+            x: 10,
+            y: 50
         }
     );
 }
-
+function getInputTxtCount(){
+    return gTxtCount;
+}
 function setImgBackground(img) {
     gMeme.selectedImg = img;
 }
