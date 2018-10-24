@@ -1,3 +1,4 @@
+
 var gCanvas;
 var gCtx;
 
@@ -27,7 +28,7 @@ function handleCanvasClick(ev) {
 
 function drawCanvas(elInput) {
     var meme = getMeme();
-    meme.selectedImg.onload();
+    // meme.selectedImg.onload();
     onTextAdd(elInput);
     meme.txts.forEach(txt => {
         drawTxt(txt);
@@ -49,12 +50,12 @@ function onTextAdd(elTxt) {
     gCtx.beginPath();
     setText(elTxt.id, elTxt.value);
     var text = getTextById(elTxt.id);
-    gCtx.strokeStyle= text.stroke;
+    gCtx.strokeStyle = text.stroke;
     gCtx.fillStyle = text.color;
     gCtx.textAlign = text.align;
     gCtx.font = `${text.size} Arial`;
-    gCtx.fillText(text.text, text.x , text.y, gCanvas.width);
-    gCtx.strokeText(text.text, text.x , text.y, gCanvas.width);
+    gCtx.fillText(text.text, text.x, text.y, gCanvas.width);
+    gCtx.strokeText(text.text, text.x, text.y, gCanvas.width);
     gCtx.closePath();
 }
 
@@ -97,13 +98,13 @@ function toggleMenu() {
 }
 
 //gallery
-function onFilter(val){
-    // debugger;
-    if(val){
+function onFilter(val) {
+    renderKeywords(val);
+    if (val) {
         var filterdImages = searchKey(val);
-        if(!filterdImages){
+        if (!filterdImages) {
             renderGallery(getGallery());
-        }else{
+        } else {
             renderGallery(filterdImages);
         }
     } else {
@@ -111,6 +112,36 @@ function onFilter(val){
     }
 }
 
+function renderKeywords(val) {
+    if (!val) {
+        document.querySelector('.filter-words').innerHTML = '';
+    } else {
+
+        var words = getKeywords();
+
+        var wordsKeys = Object.keys(words);
+        // console.log(words);
+        var strHTML = wordsKeys.map(word => {
+            var wordSize = 20;
+            if (words[word].count >= 1 && words[word].count < 3) {
+                wordSize = 25;
+            } else if (words[word].count >= 3 && words[word].count < 6) {
+                wordSize = 30;
+            } else if (words[word].count >= 6 && words[word].count < 9) {
+                wordSize = 35;
+            } else if (words[word].count >= 9 && words[word].count < 12) {
+                wordSize = 40;
+            } else if (words[word].count >= 12) {
+                wordSize = 45;
+            }
+            return `<a style="font-size:${wordSize}px" class="word-link" onclick="onKeyClick('${word}')">${word}</a>`
+        }, []);
+        document.querySelector('.filter-words').innerHTML = strHTML.join('');
+    }
+}
+function onKeyClick(word) {
+    onFilter(word);
+}
 function renderGallery(imgs) {
     var strHTML = imgs.map(img => {
         return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
@@ -124,6 +155,25 @@ function onImgClick(urlImg) {
     document.querySelector('.editor-container').classList.remove('hide');
 }
 
+
+function handleImage(e) {
+    var reader = new FileReader();
+    reader.onload = function (event) {
+        var img = new Image();
+        img.onload = function () {
+            initMeme();
+            gCanvas.width = this.width;
+            gCanvas.height = this.height;
+            gCtx.drawImage(this, 0, 0);
+        }
+        img.src = event.target.result;
+        setImgBackground(img);
+    }
+    console.log(reader);
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+
 function imageToCanvas(imgUrl) {
     var img = new Image();
     img.src = imgUrl;
@@ -134,24 +184,18 @@ function imageToCanvas(imgUrl) {
     initMeme();
 }
 
-
 function onGalleryClick() {
     document.querySelector('.gallery-container').classList.toggle('hide');
     document.querySelector('.btn-top').innerText = 'Gallery';
     document.querySelector('.editor-container').classList.toggle('hide');
 }
 
-
 function onFileInputChange(ev) {
-    handleImageFromInput(ev, renderCanvas);
+    document.querySelector('.gallery-container').classList.add('hide');
+    document.querySelector('.editor-container').classList.remove('hide');
+    handleImage(ev);
 }
 
-function renderCanvas(img) {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    gCtx.drawImage(img, 0, 0);
-    onGalleryClick();
-}
 
 // open modal emoji
 function onBtnEmoji() {
@@ -163,7 +207,6 @@ function openEmojiModal(ev) {
 }
 
 function onEmojiClick(emoji) {
-    // console.dir(emoji);
     document.querySelector('.icons-modal').classList.toggle('hide');
     saveEmoji(emoji);
 }

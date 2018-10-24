@@ -95,7 +95,7 @@ function setTxtStroke(txtId, stroke) {
 function setText(txtId, text) {
     var txt = getTextById(txtId);
     txt.text = text;
-    console.log(txt.text);
+    // console.log(txt.text);
 }
 
 function setTxtSize(txtId, size) {

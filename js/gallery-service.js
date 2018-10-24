@@ -2,15 +2,17 @@
 var gImgs;
 var countImages = 0;
 var gKeywords = {
-    fun: [],
-    happy: [],
-    sad: [],
+    fun: { count: 0, ids: [] },
+    happy: { count: 1, ids: [] },
+    sad: { count: 0, ids: [] },
 }
 
 function getGallery() {
     return gImgs;
 }
-
+function getKeywords(){
+    return gKeywords;
+}
 
 function createGallery() {
     gImgs = [
@@ -41,32 +43,29 @@ function createKeyword(...keywords) {
 }
 
 function searchKey(keyToFind) {
-    for (key in gKeywords) {
-        if (key === keyToFind) {
-            // console.log(gKeywords[key])
-            return getImagesByids(gKeywords[key]);
-        }
+    if (gKeywords[keyToFind]) {
+        gKeywords[keyToFind].count++;
+        // console.log(gKeywords[keyToFind].ids)
+        return getImagesByids(gKeywords[keyToFind].ids);
     }
 }
 function inputKeyWord(keysToFind, id) {
-    // debugger;
     keysToFind.forEach(keyToFind => {
         if (gKeywords[keyToFind]) {
-            gKeywords[keyToFind].push(id);
+            gKeywords[keyToFind].ids.push(id);
         } else {
-            gKeywords[keyToFind] = [id]
+            gKeywords[keyToFind] = { count: 0, ids: [id] };
         }
     });
 }
 
 function getImagesByids(ids) {
     var filterImgs = ids.map(id => {
-        for(let i = 0; i < gImgs.length; i++){
-            if(gImgs[i].id === id){
+        for (let i = 0; i < gImgs.length; i++) {
+            if (gImgs[i].id === id) {
                 return gImgs[i];
             }
         }
     }, [])
-    // console.log(filterImgs)
     return filterImgs;
 }
