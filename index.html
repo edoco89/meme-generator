@@ -25,19 +25,42 @@
 
     <main>
         <div class="gallery-container">
+            <div class="filter-container">
+                <input onchange="onFilter(this.value)" class="filter-input" type="text">
+                <div class="filter-words"></div>
+            </div>
             <div class="gallery"></div>
             <input type="file" name="image" onchange="onFileInputChange(event)" />
         </div>
 
         <div class="editor-container hide">
             <nav class="edit-menu">
-                <input class="input-txt-editor" id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas(this)">
-                <input class="input-txt-editor" id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas(this)">
+                <div class="txt-top-container">
+                    <input class="input-txt-editor txt-top" id="txt-top" placeholder="top text" type="text" oninput="drawCanvas(this, event)"
+                        maxlength="30">
+                    <input id="txt-top" onchange="onTxtColor(this)" type="color" value="#ffffff">
+                    <input id="txt-top" onchange="onTxtStroke(this)" type="color" value="#000000">
+                    <div class="txt-top-align">
+                        <button onclick="onTxtAlign(this)" class="txt-align-left" id="txt-top" value="left">Left</button>
+                        <button onclick="onTxtAlign(this)" class="txt-align-center" id="txt-top" value="center">Center</button>
+                        <button onclick="onTxtAlign(this)" class="txt-align-Right" id="txt-top" value="right">Right</button>
+                    </div>
+                </div>
+                <div class="txt-bottom-container">
+                    <input class="input-txt-editor txt-bottom" id="txt-bottom" placeholder="bottom text" type="text"
+                        oninput="drawCanvas(this, event)" >
+                    <input id="txt-bottom" onchange="onTxtColor(this)" type="color" value="#ffffff">
+                    <input id="txt-bottom" onchange="onTxtStroke(this)" type="color" value="#000000">
+                    <div class="txt-bottom-align">
+                        <button onclick="onTxtAlign(this)" class="txt-align-left" id="txt-bottom" value="left">Left</button>
+                        <button onclick="onTxtAlign(this)" class="txt-align-center" id="txt-bottom" value="center">Center</button>
+                        <button onclick="onTxtAlign(this)" class="txt-align-Right" id="txt-bottom" value="right">Right</button>
+                    </div>
+                </div>
                 <button>Add more text</button>
-                <input onchange="setColor(this.value)" type="color" value="#000000">
                 <a onclick="saveCanvas(this)">Save Image</a>
                 <div class="publish-form-container"></div>
-                
+
 
                 <button onclick="onBtnEmoji()">Add emoji</button>
 
@@ -47,19 +70,23 @@
                     <div class="publish-form-container"></div>
                 </div>
             </nav>
-            <canvas class="canvas" id="canvas" onclick="openEmojiModal(event)" onmousedown="handleCanvasClick(event)"></canvas>
+            <!-- onclick="openEmojiModal(event)" onmousedown="handleCanvasClick(event)" -->
+            <canvas class="canvas" id="canvas"  onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)" onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)" ></canvas>
         </div>
 
         <div class="icons-modal hide">
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-        
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
         </div>
 
     </main>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
     <script src="upload-and-share/client/js/upload-service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/meme-service.js"></script>

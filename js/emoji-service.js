@@ -13,10 +13,9 @@ function saveEmoji(emoji){
     currEmoji = emoji;
     if(currEmojiPos){
         gEmoji.push({emoji: currEmoji, x: currEmojiPos.x, y: currEmojiPos.y})
-        drawCanvas();
     }
 }
 
-function getEmoji(){
+function getEmojis(){
     return gEmoji;
 }

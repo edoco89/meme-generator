@@ -1,6 +1,11 @@
 
-var gMemes = {};
+var gMeme = {};
 var gTxtAddedCount = 0;
+var gPosX = {
+    left: 10,
+    center: 300,
+    right: 600
+}
 
 const MAX_Y = 500;
 const MIN_Y = 50;
@@ -8,28 +13,29 @@ const MAX_X = 10;
 const MIN_X = 500;
 
 
+
 function createMemes() {
-    gMemes = {
+    gMeme = {
         selectedImg: 'none',
         txts: [
             {
                 id: 'txt-top',
                 text: '',
-                size: '40px',
+                size: 40,
                 align: 'left',
                 color: 'white',
                 stroke: 'black',
-                x: canvas.width / 2,
+                x: 10,
                 y: 50
             },
             {
                 id: 'txt-bottom',
                 text: '',
-                size: '40px',
+                size: 40,
                 align: 'left',
                 color: 'white',
                 stroke: 'black',
-                x: canvas.width / 2,
+                x: 10,
                 y: canvas.height + 300
             }
         ]
@@ -53,22 +59,22 @@ function createMeme() {
 }
 
 function setImgBackground(img) {
-    gMemes.selectedImg = img;
+    gMeme.selectedImg = img;
 }
 
 function getImgBackground() {
-    return gMemes.selectedImg;
+    return gMeme.selectedImg;
 }
 
 function getMeme() {
-    return gMemes;
+    return gMeme;
 }
 
 
 function getTextById(txtId) {
-    return gMemes.txts.find(txt => {
+    return gMeme.txts.find(txt => {
         return txt.id === txtId;
-    })
+    });
 }
 
 function setTxtCords(txtId, x, y) {
@@ -95,12 +101,11 @@ function setTxtStroke(txtId, stroke) {
 function setText(txtId, text) {
     var txt = getTextById(txtId);
     txt.text = text;
-    console.log(txt.text);
 }
 
 function setTxtSize(txtId, size) {
     var text = getTextById(txtId);
-    text.size = size;
+    text.size = `${size}px`;
 }
 
 function setTxtAlign(txtId, align) {
@@ -109,7 +114,23 @@ function setTxtAlign(txtId, align) {
 }
 
 function setImgBackground(img) {
-    gMemes.selectedImg = img;
+    gMeme.selectedImg = img;
 }
 
+function setTxtAlign(txt, align) {
+    txt.align = align;
+    console.log(txt);
+}
 
+function setTxtPosX(txtId, posx) {
+    var text = getTextById(txtId);
+    text.x =  gPosX[posx];
+    console.log(text.x);
+    setTxtAlign(text, posx);
+}
+
+function setTxtCoords(txtId, x, y) {
+    var text = getTextById(txtId);
+    text.x = x;
+    text.y = y;
+}

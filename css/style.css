@@ -14,9 +14,8 @@ html, body {
 h1{
     margin: 0;
 }
-
-.top-bar{
-    height: 100px;
+.top-bar {
+    height: 48px;
     background-color: rgb(47, 54, 48);
     display: flex;
     justify-content: space-around;
@@ -26,14 +25,14 @@ h1{
 
 .logo-top{
     color: #2eb398;
-    font-size: 45px;
+    font-size: 20px;
     font-family: cursive;
 }
 
 .btn-hamburger{
     margin: 0;
     border: 0;
-    font-size: 40px;
+    font-size: 30px;
     color: white;
     background: none;
 }
@@ -66,8 +65,23 @@ h1{
     color: rgb(47, 54, 48);
 
 }
+@media screen and (min-width: 430px) {
 
+.logo-top{
+    color: #2eb398;
+    font-size: 45px;
+    font-family: cursive;
+}
+.top-bar{
+    height: 100px;
+}
+.btn-hamburger{
+    font-size: 40px;
+}
+
+}
 @media screen and (min-width: 700px) {
+  
     .btn-top-container{
         background: none;
         flex-direction: row;
@@ -106,8 +120,10 @@ canvas {
 /* editor */
 .editor-container{
     display: flex;
+    flex-direction: column;
 
 }
+
 .edit-menu{
     display: flex;
     flex-direction: column;
@@ -138,6 +154,15 @@ canvas {
     font-size: 20px;
     text-align: center;
 }
+
+@media screen and (min-width: 700px) {
+    .editor-container{
+        display: flex;
+        flex-direction: row;
+
+    }
+}
+
 /* modal icons */
 .icons-modal{
     width: 87px;
