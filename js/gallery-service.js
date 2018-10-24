@@ -10,6 +10,11 @@ var gImgs = [
     {id: 6, url: 'meme-imgs/8.jpg', keywords: ['happy']},
 ]
 
+var gKeyWords = {
+    happy: [1, 2, 3, 4, 5, 6],
+    
+}
+
 function getGallery(){
     return gImgs;
 }

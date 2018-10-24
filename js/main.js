@@ -1,14 +1,22 @@
 var gCanvas;
 var gCtx;
-var gCanvasBackground;
+
 
 
 function init() {
-    gCanvas = document.querySelector('#canvas');
-    // gCanvas.width = document.body.clientWidth;
-    // gCanvas.height = document.body.clientHeight;
-    gCtx = canvas.getContext('2d');
     renderGallery();
+    createMemes();
+}
+
+function initMeme() {
+    gCanvas = document.querySelector('#canvas');
+    gCtx = canvas.getContext('2d');
+    var meme = getMeme();
+    gCanvas.width = meme.selectedImg.width;
+    gCanvas.height = meme.selectedImg.height;
+    meme.txts.forEach(txt => {
+        drawTxt(txt);
+    });
 }
 
 function handleCanvasClick(ev) {
@@ -16,31 +24,37 @@ function handleCanvasClick(ev) {
     setLastTimestamp(ev.timeStamp);
 }
 
-function drawCanvas() {
-    gCanvas = document.querySelector('#canvas');
-    gCanvas.width = document.body.clientWidth;
-    gCanvas.height = document.body.clientHeight;
-    gCanvasBackground();
-    gCtx = canvas.getContext('2d');
-    onTextAdd(document.getElementById('txt-top').value);
-    onTextAdd(document.getElementById('txt-bottom').value);
-    var emojis = getEmoji();
-    if (emojis) {
-        onEmojiAdd(emojis);
-    }
+function drawCanvas(elInput) {
+    var meme = getMeme();
+    meme.selectedImg.onload();
+    onTextAdd(elInput);
+    meme.txts.forEach(txt => {
+        drawTxt(txt);
+    });
+    console.dir(canvas);
+    // var emojis = getEmoji();
+    // if (emojis) {
+    //     onEmojiAdd(emojis);
+    // }
 }
 
-function onTextAdd(txt) {
+function drawTxt(txt) {
+    var elTxt = document.getElementById(txt.id);
+    elTxt.value = txt.text;
+    onTextAdd(elTxt);
+}
+
+function onTextAdd(elTxt) {
     gCtx.beginPath();
-    gColor = getColor();
-    gCtx.strokeStyle= "black";
-    gCtx.fillStyle = gColor;
-    gCtx.textAlign = "center";
-    gCtx.font = "40px Arial";
-    gCtx.fillText(txt, gCanvas.width / 2 , 50, gCanvas.width);
-    gCtx.strokeText(txt, gCanvas.width / 2 , 50, gCanvas.width);
-    // gCanvas.height
-    // gCtx.stroke();
+    setText(elTxt.id, elTxt.value);
+    var text = getTextById(elTxt.id);
+    gCtx.strokeStyle= text.stroke;
+    gCtx.fillStyle = text.color;
+    gCtx.textAlign = text.align;
+    gCtx.font = `${text.size} Arial`;
+    gCtx.fillText(text.text, text.x , text.y, gCanvas.width);
+    gCtx.strokeText(text.text, text.x , text.y, gCanvas.width);
+    gCtx.closePath();
 }
 
 function onEmojiAdd(emojis) {
@@ -63,14 +77,14 @@ function clearCanvas() {
     gCtx = null;
     gCtx = gCanvas.getContext('2d');
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-    gCanvasBackground();
+    getImgBackground().onload();
     document.getElementById('txt-top').value = '';
     document.getElementById('txt-bottom').value = '';
+
 }
 
 function saveCanvas(elLink) {
     var imgContent = canvas.toDataURL();
-    console.dir(elLink);
     elLink.href = imgContent;
     elLink.download = 'my-canvas.jpg';
 }
@@ -99,12 +113,11 @@ function onImgClick(urlImg) {
 function imageToCanvas(imgUrl) {
     var img = new Image();
     img.src = imgUrl;
-    gCanvasBackground = img.onload = function () {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        gCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, img.width, img.height);
     }
-    drawCanvas();
+    setImgBackground(img);
+    initMeme();
 }
 
 

@@ -31,10 +31,10 @@
 
         <div class="editor-container hide">
             <nav class="edit-menu">
-                <input class="input-txt-editor" id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas()">
-                <input class="input-txt-editor" id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas()">
+                <input class="input-txt-editor" id="txt-top" placeholder="top text" type="text" onkeyup="drawCanvas(this)">
+                <input class="input-txt-editor" id="txt-bottom" placeholder="bottom text" type="text" onkeyup="drawCanvas(this)">
                 <button>Add more text</button>
-                <input onchange="setColor(this.value)" type="color" value="#ffffff">
+                <input onchange="setColor(this.value)" type="color" value="#000000">
                 <a onclick="saveCanvas(this)">Save Image</a>
                 <div class="publish-form-container"></div>
                 
