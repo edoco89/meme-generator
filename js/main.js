@@ -98,17 +98,16 @@ function onFilter(val) {
     }
 }
 
-function renderGallery(imgs) {
-    var strHTML = imgs.map(img => {
-        return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
-    }, []);
-    document.querySelector('.gallery').innerHTML = strHTML.join('');
-}
 
 function onImgClick(urlImg) {
-    imageToCanvas(urlImg);
-    document.querySelector('.gallery-container').classList.add('hide');
-    document.querySelector('.editor-container').classList.remove('hide');
+    if(urlImg === 'meme-imgs/upload-image.jpg'){
+        // document.querySelector('#upload-input').type = "file";
+        document.querySelector('#upload-input').click();
+    }else{
+        imageToCanvas(urlImg);
+        document.querySelector('.gallery-container').classList.add('hide');
+        document.querySelector('.editor-container').classList.remove('hide');
+    }
 }
 
 function imageToCanvas(imgUrl) {
@@ -166,12 +165,25 @@ function renderKeywords(val) {
 function onKeyClick(word) {
     onFilter(word);
 }
+// function renderGallery(imgs) {
+//     var strHTML = imgs.map(img => {
+//         return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
+//     }, []);
+//     document.querySelector('.gallery').innerHTML = strHTML.join('');
+// }
+
 function renderGallery(imgs) {
     var strHTML = imgs.map(img => {
-        return `<img onclick="onImgClick('${img.url}')" class="img-gallery" src="${img.url}">`
+        return `<div onclick="onImgClick('${img.url}')" class="container">
+                    <img src="${img.url}" alt="Avatar" class="image img-gallery" style="width:100%">
+                    <div class="middle">
+                    </div>
+                </div>`
     }, []);
     document.querySelector('.gallery').innerHTML = strHTML.join('');
 }
+
+
 
 function onGalleryClick() {
     document.querySelector('.gallery-container').classList.toggle('hide');
@@ -179,6 +191,10 @@ function onGalleryClick() {
     document.querySelector('.editor-container').classList.toggle('hide');
 }
 
+
+function onAbout(){
+    document.querySelector('.contact-modal').classList.toggle('hide');
+}
 function handleImage(e) {
     var reader = new FileReader();
     reader.onload = function (event) {

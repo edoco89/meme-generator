@@ -16,6 +16,7 @@ function getKeywords(){
 
 function createGallery() {
     gImgs = [
+        createImage('meme-imgs/upload-image.jpg', []),
         createImage('meme-imgs/1.jpg', ['happy', 'fun']),
         createImage('meme-imgs/2.jpg', ['happy']),
         createImage('meme-imgs/3.jpg', ['sad']),
