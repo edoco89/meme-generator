@@ -10,10 +10,14 @@ html, body {
 *, *:after, *:before {
     box-sizing: inherit;
 }
-
-
 .canvas-container {
-    width: 600px;
+    width: 430px;
+   }
+@media screen and (min-width: 430px) {
+
+    .canvas-container {
+     width: 600px;
+    }
 }
 
 h1{

@@ -34,6 +34,8 @@
             <input id="upload-input" type="file" name="image" onchange="onFileInputChange(event)" />
         </div>
 
+
+
         <div class="editor-container hide">
             <nav class="edit-menu">
                 <div class="txt-container">
@@ -48,23 +50,22 @@
                     </div>
                     <button class="add-txt" onclick="onAddText()">Add Line</button>
                     <button class="delete-txt" onclick="onDeleteText()">Delete Line</button>
+                    <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
                 </div>
 
-        </div>
-        <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
-        <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
-        <div class="publish-form-container"></div>
+                <div class="bts-imp-container">
+                    <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
+                    <div class="publish-form-container"></div>
+                    <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
+            </nav>
 
-        <div class="bts-imp-container">
-            <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
-            <div class="publish-form-container"></div>
+
+            <div class="canvas-container">
+                <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
+                    onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
+            </div>
         </div>
-        </nav>
-        <div class="canvas-container">
-            <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
-                onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
-        </div>
-        </div>
+
 
         <div class="icons-modal">
             <button onclick="closeEmojiModal()">close</button>
