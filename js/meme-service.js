@@ -1,6 +1,5 @@
 
 var gMeme = {};
-var gPosX = {};
 var gTxtCount = 1;
 
 
@@ -15,6 +14,7 @@ function createMeme() {
                 align: 'left',
                 color: '#ffffff',
                 stroke: '#000000',
+                strokeSize: 1,
                 x: 10,
                 y: 50
             }
@@ -32,6 +32,7 @@ function createText() {
             align: 'left',
             color: '#ffffff',
             stroke: '#000000',
+            strokeSize: 1,
             x: 10,
             y: 50
         }
@@ -65,11 +66,6 @@ function getMeme() {
     return gMeme;
 }
 
-function setPosX(canvasWidth){
-    gPosX.left = 10;
-    gPosX.center = canvasWidth  / 2 ;
-    gPosX.right = canvasWidth;
-}
 
 function getTextById(txtId) {
     return gMeme.txts.find(txt => {
@@ -101,7 +97,12 @@ function setText(txtId, text) {
 
 function setTxtSize(txtId, size) {
     var text = getTextById(txtId);
-    text.size = `${size}px`;
+    text.size = size;
+}
+
+function setStrokeSize(txtId, strokeSize) {
+    var text = getTextById(txtId);
+    text.strokeSize = strokeSize;
 }
 
 
@@ -110,9 +111,7 @@ function setImgBackground(img) {
 }
 
 
-function setTxtPosX(txtId, posx) {
+function setTxtAlign(txtId, align) {
     var text = getTextById(txtId);
-    text.x =  gPosX[posx];
-    text.align = posx;
-    setTxtCords(txtId, text.x, text.y);
+    text.align = align;
 }

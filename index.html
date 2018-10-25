@@ -42,11 +42,15 @@
                     <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
                     <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
                     <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
-                    <div class="txt-align">
-                        <button onclick="onTxtAlign(this.value)" class="txt-align-left" value="left">Left</button>
-                        <button onclick="onTxtAlign(this.value)" class="txt-align-center" value="center">Center</button>
-                        <button onclick="onTxtAlign(this.value)" class="txt-align-Right" value="right">Right</button>
-                    </div>
+                    <!-- <div class="txt-align">
+                        <button onclick="onTxtAlign('left')" class="txt-align-left" value="left">Left</button>
+                        <button onclick="onTxtAlign('center')" class="txt-align-center" value="center">Center</button>
+                        <button onclick="onTxtAlign('right')" class="txt-align-Right" value="right">Right</button>
+                    </div> -->
+                    <button class="txt-size-up" onclick="onTextSizeUp()">A</button>
+                    <button class="txt-size-down" onclick="onTextSizeDown()">a</button>
+                    <button class="stroke-size-up" onclick="onStrokeSizeUp()">||</button>
+                    <button class="stroke-size-down" onclick="onStrokeSizeDown()">|</button>
                     <button class="add-txt" onclick="onAddText()">Add Line</button>
                     <button class="delete-txt" onclick="onDeleteText()">Delete Line</button>
                     <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
@@ -57,17 +61,17 @@
                     <div class="publish-form-container"></div>
                 </div>
             </nav>
-                <div class="canvas-container">
-                    <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
-                        onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
-                </div>
+            <div class="canvas-container">
+                <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
+                onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
+            </div>
         </div>
-
-
-
-
+        
+        
+        
+        
         <div class="icons-modal">
-            <button onclick="closeEmojiModal()">close</button>
+                <button onclick="closeEmojiModal()">X</button>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>

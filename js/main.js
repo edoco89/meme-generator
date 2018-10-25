@@ -50,13 +50,18 @@ function drawCanvas() {
         gCtx.strokeStyle = text.stroke;
         gCtx.fillStyle = text.color;
         gCtx.textAlign = text.align;
-        setPosX(gCanvas.width);
         gCtx.font = `${text.size}px impact`;
+        gCtx.lineWidth = text.strokeSize;
         gCtx.fillText(text.text, text.x, text.y);
         gCtx.strokeText(text.text, text.x, text.y);
     });
     var emojis = getEmojis();
-    if (emojis) onEmojiAdd(emojis);
+    emojis.forEach(emoji => {
+        emoji.width = gCtx.measureText(emoji.emoji).width;
+        emoji.height = emoji.size;
+        gCtx.font = `${emoji.size}30px Arial`;
+        gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
+    });
 }
 
 function onSetTxt(txt) {
@@ -119,6 +124,39 @@ function onDeleteText() {
         }
     }
 }
+
+function onTextSizeUp() {
+    if (gCurrentInput.size < 101){
+        gCurrentInput.size += 5;
+        setTxtSize(gCurrentInput.id, gCurrentInput.size); 
+        drawCanvas();
+    }
+}
+
+function onTextSizeDown() {
+    if (gCurrentInput.size > 9){
+        gCurrentInput.size -= 5;
+        setTxtSize(gCurrentInput.id, gCurrentInput.size); 
+        drawCanvas();
+    }
+}
+
+function onStrokeSizeUp() {
+    if (gCurrentInput.strokeSize <  10){
+        gCurrentInput.strokeSize += 0.5;
+        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize); 
+        drawCanvas();
+    }
+}
+
+function onStrokeSizeDown() {
+    if (gCurrentInput.strokeSize >= 0){
+        gCurrentInput.strokeSize -= 0.5;
+        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize); 
+        drawCanvas();
+    }
+}
+
 //gallery
 function onFilter(val) {
     if (val) {
@@ -273,12 +311,12 @@ function onFileInputChange(ev) {
 
 
 function onTxtAlign(align) {
-    setTxtPosX(gCurrentInput.id, align);
+    setTxtAlign(gCurrentInput.id, align);
     drawCanvas();
 }
 
 function handleMouseDown(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     if (!ev.clientX) {
         gRect = ev.target.getBoundingClientRect();
         gStartX = parseInt(ev.touches[0].clientX - gRect.left);
@@ -290,9 +328,6 @@ function handleMouseDown(ev) {
     var meme = getMeme();
     var texts = meme.txts;
     for (var i = 0; i < texts.length; i++) {
-        // if (gCurrentInput.align === 'right') gCurrentInput.x = gCanvas.width - gCurrentInput.width;
-        // if (gCurrentInput.align === 'center') gCurrentInput.x = (gCanvas.width / 2) - gCurrentInput.width;
-        // if (gCurrentInput.align === 'left') gCurrentInput.x = 10;
         if (textHitTest(texts[i], gStartX, gStartY)) {
             gSelectedText = texts[i].text;
             gSelectedTextIdx = i;
@@ -341,11 +376,11 @@ function textHitTest(text, x, y) {
 
 
 function handleMouseUp(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     gSelectedTextIdx = -1;
 }
 
 function handleMouseOut(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
     gSelectedTextIdx = -1;
 }
