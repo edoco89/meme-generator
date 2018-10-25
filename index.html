@@ -39,52 +39,56 @@
         <div class="editor-container hide">
             <nav class="edit-menu">
                 <div class="txt-container">
-                    <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
-                    <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
-                    <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
+                    <div class="btn-emoji-container">
+                        <div class="icons-modal hide">
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
+                        </div>
+                        <img class="img-btn" onclick="onBtnEmoji()" src="icons-imgs/em-btn.png">
+
+                    </div>
+                    <div class="input-container">
+                        <button class="delete-txt btn-input" onclick="onDeleteText()">❌</button>
+                        <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
+                        <button class="add-txt btn-input" onclick="onAddText()">➕</button>
+                    </div>
                     <div class="txt-align">
+                        <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
+                        <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
                         <button onclick="onTxtAlign(this.value)" class="txt-align-left" value="left">Left</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-center" value="center">Center</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-Right" value="right">Right</button>
+                        <button class="" id="clear-btn" onclick="clearCanvas()">Clear</button>
+
                     </div>
-                    <button class="add-txt" onclick="onAddText()">Add Line</button>
-                    <button class="delete-txt" onclick="onDeleteText()">Delete Line</button>
-                    <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
-                    <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
+
+
+
                 </div>
+
+
                 <div class="bts-imp-container">
-                    <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
+                    <a class="btn-imp" id="save" onclick="saveCanvas(this)">Save Image</a>
                     <div class="publish-form-container"></div>
                 </div>
+
             </nav>
-                <div class="canvas-container">
-                    <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
-                        onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
-                </div>
+            <div class="canvas-container">
+                <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
+                    onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
+            </div>
         </div>
 
 
 
 
-        <div class="icons-modal">
-            <button onclick="closeEmojiModal()">close</button>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
-            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
-        </div>
+
 
         <div class="contact-modal hide">
             <h2>Created By Edo Cohen and Tom Manger</h2>

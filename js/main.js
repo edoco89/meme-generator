@@ -238,7 +238,7 @@ function handleImage(e) {
 
 // open modal emoji
 function onBtnEmoji() {
-    document.querySelector('.icons-modal').classList.toggle('open-emojis');
+    document.querySelector('.icons-modal').classList.toggle('hide');
 }
 function openEmojiModal(ev) {
     document.querySelector('.icons-modal').classList.toggle('open-emojis');
