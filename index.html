@@ -16,7 +16,7 @@
             <h1 class="logo-top">Meme Generator</h1>
             <button onclick="toggleMenu()" class="btn-hamburger">☰</button>
             <section class="btn-top-container">
-                <a class="btn-top" onclick="onGalleryClick()">Editor</a>
+                <a class="btn-top" onclick="onGalleryClick()">Gallery</a>
                 <a class="btn-top" onclick="onAbout()">About</a>
                 <a class="btn-top" href="">Get in touch</a>
             </section>
@@ -36,15 +36,16 @@
         <div class="editor-container hide">
             <nav class="edit-menu">
                 <div class="txt-container">
-                    <input class="input-txt-editor"  placeholder="writ here..." type="text" oninput="onSetTxt(this.value)">
-                    <input id="txt-top" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
-                    <input id="txt-top" onchange="onTxtStroke(this.value)" type="color" value="#000000">
-                    <div class="txt-top-align">
+                    <input class="input-txt-editor"  placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
+                    <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
+                    <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
+                    <div class="txt-align">
                         <button onclick="onTxtAlign(this.value)" class="txt-align-left"  value="left">Left</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-center"  value="center">Center</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-Right"  value="right">Right</button>
                     </div>
                     <button class="add-txt" onclick="onAddText()">Add Text</button>
+                    <button class="delete-txt" onclick="onDeleteText()">Delete Text</button>
                 </div>
                 <!-- <div class="txt-bottom-container">
                     <input class="input-txt-editor txt-bottom" id="txt-bottom" placeholder="bottom text" type="text"
@@ -69,7 +70,7 @@
                     <div class="publish-form-container"></div>
                 </div>
             </nav>
-            <!-- onclick="openEmojiModal(event)" onmousedown="handleCanvasClick(event)" -->
+            <!-- onclick="openEmojiModal(event)" onclick="onCanvasInput(event)" onmousedown="handleCanvasClick(event)" -->
             <canvas class="canvas" id="canvas"  onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)" onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)" ></canvas>
         </div>
 
@@ -90,7 +91,7 @@
 
 
     </main>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
     <script src="upload-and-share/client/js/upload-service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/meme-service.js"></script>

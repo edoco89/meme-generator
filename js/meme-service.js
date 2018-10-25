@@ -7,14 +7,8 @@ var gPosX = {
 }
 var gTxtCount = 1;
 
-const MAX_Y = 500;
-const MIN_Y = 50;
-const MAX_X = 10;
-const MIN_X = 500;
 
-
-
-function createMemes() {
+function createMeme() {
     gMeme = {
         selectedImg: 'none',
         txts: [
@@ -23,27 +17,16 @@ function createMemes() {
                 text: '',
                 size: 40,
                 align: 'left',
-                color: 'white',
-                stroke: 'black',
+                color: '#ffffff',
+                stroke: '#000000',
                 x: 10,
                 y: 50
             }
-            // ,
-            // {
-            //     id: 'txt-bottom',
-            //     text: '',
-            //     size: 40,
-            //     align: 'left',
-            //     color: 'white',
-            //     stroke: 'black',
-            //     x: 10,
-            //     y: canvas.height + 300
-            // }
         ]
     }
 }
 
-function createMeme() {
+function createText() {
     gTxtCount++;
     gMeme.txts.push(
         {
@@ -51,16 +34,29 @@ function createMeme() {
             text: '',
             size: 40,
             align: 'left',
-            color: 'white',
-            stroke: 'black',
+            color: '#ffffff',
+            stroke: '#000000',
             x: 10,
             y: 50
         }
     );
 }
+
+function deletText(txtId){
+    gTxtCount--;
+    var textIdx = gMeme.txts.findIndex(txt => {
+        return txt.id === txtId
+    })
+    gMeme.txts.splice(textIdx, 1);
+}
+
 function getInputTxtCount(){
     return gTxtCount;
 }
+function initInputTxtCount() {
+    gTxtCount = 1;
+}
+
 function setImgBackground(img) {
     gMeme.selectedImg = img;
 }
@@ -73,6 +69,11 @@ function getMeme() {
     return gMeme;
 }
 
+function setPosX(){
+    gPosX.left = 10;
+    gPosX.center = gMeme.selectedImg.width  / 2;
+    gPosX.right = gMeme.selectedImg.width;
+}
 
 function getTextById(txtId) {
     return gMeme.txts.find(txt => {
@@ -84,10 +85,6 @@ function setTxtCords(txtId, x, y) {
     var text = getTextById(txtId);
     text.x = x;
     text.y = y;
-}
-
-function setLastTimestamp(timeStamp) {
-    gPrevTimeStemp = timeStamp;
 }
 
 
@@ -104,7 +101,6 @@ function setTxtStroke(txtId, stroke) {
 function setText(txtId, text) {
     var txt = getTextById(txtId);
     txt.text = text;
-    // console.log(txt.text);
 }
 
 function setTxtSize(txtId, size) {
@@ -112,29 +108,15 @@ function setTxtSize(txtId, size) {
     text.size = `${size}px`;
 }
 
-function setTxtAlign(txtId, align) {
-    var text = getTextById(txtId);
-    text.align = align;
-}
 
 function setImgBackground(img) {
     gMeme.selectedImg = img;
 }
 
-function setTxtAlign(txt, align) {
-    txt.align = align;
-    console.log(txt);
-}
 
 function setTxtPosX(txtId, posx) {
     var text = getTextById(txtId);
     text.x =  gPosX[posx];
-    console.log(text.x);
-    setTxtAlign(text, posx);
-}
-
-function setTxtCoords(txtId, x, y) {
-    var text = getTextById(txtId);
-    text.x = x;
-    text.y = y;
+    text.align = posx;
+    setTxtCords(txtId, text.x, text.y);
 }
