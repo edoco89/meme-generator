@@ -84,7 +84,7 @@ function toggleMenu() {
     document.querySelector('.btn-top-container').classList.toggle('open-btn');
 }
 
-function onAddText(){
+function onAddText() {
     createMeme();
     var meme = getMeme();
     gCurrentInput = meme.txts[getInputTxtCount() - 1];
@@ -109,10 +109,10 @@ function onFilter(val) {
 
 
 function onImgClick(urlImg) {
-    if(urlImg === 'meme-imgs/upload-image.jpg'){
+    if (urlImg === 'meme-imgs/upload-image.jpg') {
         // document.querySelector('#upload-input').type = "file";
         document.querySelector('#upload-input').click();
-    }else{
+    } else {
         imageToCanvas(urlImg);
         document.querySelector('.gallery-container').classList.add('hide');
         document.querySelector('.editor-container').classList.remove('hide');
@@ -150,9 +150,7 @@ function renderKeywords(val) {
     } else {
 
         var words = getKeywords();
-
         var wordsKeys = Object.keys(words);
-        // console.log(words);
         var strHTML = wordsKeys.map(word => {
             var wordSize = 20;
             if (words[word].count >= 1 && words[word].count < 3) {
@@ -193,7 +191,6 @@ function renderGallery(imgs) {
 }
 
 
-
 function onGalleryClick() {
     document.querySelector('.gallery-container').classList.toggle('hide');
     document.querySelector('.btn-top').innerText = 'Gallery';
@@ -201,7 +198,7 @@ function onGalleryClick() {
 }
 
 
-function onAbout(){
+function onAbout() {
     document.querySelector('.contact-modal').classList.toggle('hide');
 }
 function handleImage(e) {
@@ -224,18 +221,21 @@ function handleImage(e) {
 
 // open modal emoji
 function onBtnEmoji() {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
 }
 function openEmojiModal(ev) {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
     saveEmojiPos(ev);
 }
 
 function onEmojiClick(emoji) {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
     saveEmoji(emoji);
     var emojis = getEmojis();
     onEmojiAdd(emojis);
+}
+function closeEmojiModal(){
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
 }
 
 function onTxtColor(color) {
@@ -314,3 +314,4 @@ function handleMouseUp(ev) {
 function handleMouseOut(ev) {
     gSelectedTextIdx = -1;
 }
+

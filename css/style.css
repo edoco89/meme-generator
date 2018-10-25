@@ -108,9 +108,18 @@ canvas {
 
 
 /* gallery */
+.gallery-container{
+    max-width: 900px;
+    margin: 0 auto;
+}
 .gallery{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+@media screen and (min-width: 400px) {
+    .gallery{
+        grid-template-columns: repeat(auto-fill, minmax(133px, 1fr));
+    }
 }
 @media screen and (min-width: 700px) {
     .gallery{
@@ -178,8 +187,16 @@ canvas {
 /* editor */
 .editor-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
+}
+.txt-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.txt-top-align{
+    text-align: center;
 }
 
 .edit-menu{
@@ -212,24 +229,23 @@ canvas {
     font-size: 20px;
     text-align: center;
 }
-
-@media screen and (min-width: 700px) {
-    .editor-container{
-        display: flex;
-        flex-direction: row;
-
-    }
-}
-
 /* modal icons */
 .icons-modal{
-    width: 87px;
-    height: 400px;
-    background-color: #2eb398;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    width: 343px;
+    height: 0;
+    background-color: #2eb398e8;
     position: fixed;
-    top: 122px;
-    left: 319px;
+    top: 234px;
+    left: 16px;
     text-align: center;
+    transition: height 1;
+    display: grid;
+    visibility: hidden;
+}
+.icons-modal.open-emojis{
+    visibility: visible;
+    height: 70%;
 }
 .emoji{
     font-size: 30px;
@@ -238,6 +254,24 @@ canvas {
 .emoji:hover{
     font-size: 35px;
 }
+
+@media screen and (min-width: 1077px) {
+    .editor-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+    }
+    .icons-modal {
+        width: 343px;
+        height: 60%;
+        position: fixed;
+        top: 101px;
+        left: 371px;
+        text-align: center;
+    }
+}
+
 
 
 
