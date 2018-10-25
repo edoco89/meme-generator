@@ -40,7 +40,6 @@
                     <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
                     <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
                     <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
-
                     <div class="txt-align">
                         <button onclick="onTxtAlign(this.value)" class="txt-align-left" value="left">Left</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-center" value="center">Center</button>
@@ -48,23 +47,21 @@
                     </div>
                     <button class="add-txt" onclick="onAddText()">Add Line</button>
                     <button class="delete-txt" onclick="onDeleteText()">Delete Line</button>
+                    <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
+                    <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
                 </div>
+                <div class="bts-imp-container">
+                    <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
+                    <div class="publish-form-container"></div>
+                </div>
+            </nav>
+                <div class="canvas-container">
+                    <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
+                        onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
+                </div>
+        </div>
 
-        </div>
-        <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
-        <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
-        <div class="publish-form-container"></div>
 
-        <div class="bts-imp-container">
-            <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
-            <div class="publish-form-container"></div>
-        </div>
-        </nav>
-        <div class="canvas-container">
-            <canvas class="canvas" id="canvas" onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)"
-                onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)"></canvas>
-        </div>
-        </div>
 
         <div class="icons-modal">
             <button onclick="closeEmojiModal()">close</button>
