@@ -1,10 +1,6 @@
 
 var gMeme = {};
-var gPosX = {
-    left: 10,
-    center: 300,
-    right: 600
-}
+var gPosX = {};
 var gTxtCount = 1;
 
 
@@ -69,10 +65,10 @@ function getMeme() {
     return gMeme;
 }
 
-function setPosX(){
+function setPosX(canvasWidth){
     gPosX.left = 10;
-    gPosX.center = gMeme.selectedImg.width  / 2;
-    gPosX.right = gMeme.selectedImg.width;
+    gPosX.center = canvasWidth  / 2 ;
+    gPosX.right = canvasWidth;
 }
 
 function getTextById(txtId) {
