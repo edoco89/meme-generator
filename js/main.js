@@ -23,6 +23,7 @@ function init() {
     gCanvas.addEventListener("touchstart", handleMouseDown, false);
 }
 
+
 function initMeme(imgUrl) {
     var img = new Image();
     img.src = imgUrl;
