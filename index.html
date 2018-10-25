@@ -26,7 +26,8 @@
     <main>
         <div class="gallery-container">
             <div class="filter-container flex-center">
-                <input class="input-keyword" placeholder="search keyword" onkeyup="onFilter(this.value)" class="filter-input" type="text">
+                <input class="input-keyword" placeholder="search keyword" onkeyup="onFilter(this.value)" class="filter-input"
+                    type="text">
             </div>
             <div class="filter-words flex-center"></div>
             <div class="gallery"></div>
@@ -58,14 +59,11 @@
                         <button onclick="onTxtAlign(this)" class="txt-align-Right" id="txt-bottom" value="right">Right</button>
                     </div>
                 </div> -->
-                <a onclick="saveCanvas(this)">Save Image</a>
+                <button class="btn-imp" onclick="onBtnEmoji()">Add emoji</button>
+                <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
                 <div class="publish-form-container"></div>
 
-
-                <button onclick="onBtnEmoji()">Add emoji</button>
-
                 <div class="bts-imp-container">
-                    <button class="btn-imp" id="clear-btn" onclick="clearCanvas()">Clear</button>
                     <a class="btn-imp" onclick="saveCanvas(this)">Save Image</a>
                     <div class="publish-form-container"></div>
                 </div>
@@ -74,7 +72,16 @@
             <canvas class="canvas" id="canvas"  onmousedown="handleMouseDown(event)" onmousemove="handleMouseMove(event)" onmouseup="handleMouseUp(event)" onmouseout="handleMouseOut(event)" ></canvas>
         </div>
 
-        <div class="icons-modal hide">
+        <div class="icons-modal">
+            <button onclick="closeEmojiModal()">close</button>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
+            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
             <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>

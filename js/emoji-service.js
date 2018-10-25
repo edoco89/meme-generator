@@ -19,3 +19,4 @@ function saveEmoji(emoji){
 function getEmojis(){
     return gEmoji;
 }
+

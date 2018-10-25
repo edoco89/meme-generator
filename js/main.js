@@ -178,9 +178,7 @@ function renderKeywords(val) {
     } else {
 
         var words = getKeywords();
-
         var wordsKeys = Object.keys(words);
-        // console.log(words);
         var strHTML = wordsKeys.map(word => {
             var wordSize = 20;
             if (words[word].count >= 1 && words[word].count < 3) {
@@ -219,7 +217,6 @@ function initEditMenu() {
     document.getElementById('txt-stroke').value = '#000000';
     document.querySelector('.input-txt-editor').value = '';
 }
-
 
 function onGalleryClick() {
     var meme = getMeme();
@@ -260,18 +257,21 @@ function handleImage(e) {
 
 // open modal emoji
 function onBtnEmoji() {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
 }
 function openEmojiModal(ev) {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
     saveEmojiPos(ev);
 }
 
 function onEmojiClick(emoji) {
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
     saveEmoji(emoji);
     var emojis = getEmojis();
     onEmojiAdd(emojis);
+}
+function closeEmojiModal(){
+    document.querySelector('.icons-modal').classList.toggle('open-emojis');
 }
 
 function onTxtColor(color) {

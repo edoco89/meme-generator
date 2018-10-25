@@ -1,8 +1,9 @@
 
 var gImgs;
 var countImages = 0;
+
 var gKeywords = {
-    fun: { count: 0, ids: [] },
+    'fun': { count: 0, ids: [] },
     happy: { count: 1, ids: [] },
     sad: { count: 0, ids: [] },
 }
@@ -13,6 +14,7 @@ function getGallery() {
 function getKeywords(){
     return gKeywords;
 }
+
 
 function createGallery() {
     gImgs = [
@@ -30,26 +32,34 @@ function createGallery() {
 }
 
 function createImage(url, keywords) {
-    countImages++;
-    inputKeyWord(keywords, countImages);
+    var id = makeId();
+    inputKeyWord(keywords, id);
     return {
-        id: countImages,
+        id,
         url,
         keywords
     }
 }
 
-function createKeyword(...keywords) {
-    return [...keywords];
-}
+
 
 function searchKey(keyToFind) {
-    if (gKeywords[keyToFind]) {
-        gKeywords[keyToFind].count++;
-        // console.log(gKeywords[keyToFind].ids)
-        return getImagesByids(gKeywords[keyToFind].ids);
+    var allImgs = [];
+    for(var key in gKeywords){
+        if(key.includes(keyToFind)){
+            gKeywords[key].count++;
+            var currImgs = getImagesByids(gKeywords[key].ids)
+            currImgs.forEach(curr => {
+                allImgs.push(curr);
+            })
+        }
     }
+    return allImgs;
 }
+
+
+
+
 function inputKeyWord(keysToFind, id) {
     keysToFind.forEach(keyToFind => {
         if (gKeywords[keyToFind]) {
