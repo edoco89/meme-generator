@@ -28,6 +28,22 @@ function createGallery() {
         createImage('meme-imgs/7.jpg', ['sad']),
         createImage('meme-imgs/8.jpg', ['p']),
         createImage('meme-imgs/9.jpg', ['happy']),
+        createImage('meme-imgs/10.jpg', ['happy', 'fun']),
+        createImage('meme-imgs/11.jpg', ['happy']),
+        createImage('meme-imgs/12.jpg', ['sad']),
+        createImage('meme-imgs/13.jpg', ['koko']),
+        createImage('meme-imgs/14.jpg', ['pop']),
+        createImage('meme-imgs/15.jpg', ['lolo']),
+        createImage('meme-imgs/16.jpg', ['sad']),
+        createImage('meme-imgs/17.jpg', ['p']),
+        createImage('meme-imgs/18.jpg', ['happy']),
+        createImage('meme-imgs/19.jpg', ['happy', 'fun']),
+        createImage('meme-imgs/20.jpg', ['happy']),
+        createImage('meme-imgs/21.jpg', ['sad']),
+        createImage('meme-imgs/22.jpg', ['koko']),
+        createImage('meme-imgs/23.jpg', ['pop']),
+        createImage('meme-imgs/24.jpg', ['lolo']),
+        createImage('meme-imgs/25.jpg', ['sad']),
     ]
 }
 
