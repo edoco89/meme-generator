@@ -27,8 +27,13 @@ function initMeme() {
     gCanvas.addEventListener("touchancelc", handleMouseOut, false);
     gCanvas.addEventListener("touchstart", handleMouseDown, false);
     // if (!window.event.clientX) {
-        gCanvas.width = window.innerWidth;
-        gCanvas.height = window.innerHeight;
+
+        var deviceWidth = window.innerWidth;;
+        canvasWidth = Math.min(600, deviceWidth-20);
+        // canvasHeight = Math.min(480, deviceWidth-20);
+
+        gCanvas.width = canvasWidth;
+        // gCanvas.height = canvasHeight;
     // } else {
     //     gCanvas.width = meme.selectedImg.width;
     //     gCanvas.height = meme.selectedImg.height;
