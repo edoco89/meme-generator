@@ -1,21 +1,25 @@
 
+// ***** GLOBAL VARIABLE ***** //
 var gImgs;
 var countImages = 0;
-
 var gKeywords = {
     'fun': { count: 0, ids: [] },
     happy: { count: 1, ids: [] },
     sad: { count: 0, ids: [] },
 }
 
+
+// Return the gallery
 function getGallery() {
     return gImgs;
 }
+
+// Return the keywords
 function getKeywords(){
     return gKeywords;
 }
 
-
+// Creating the gallery
 function createGallery() {
     gImgs = [
         createImage('meme-imgs/upload-image.jpg', []),
@@ -47,6 +51,7 @@ function createGallery() {
     ]
 }
 
+// Create new image the user upload
 function createImage(url, keywords) {
     var id = makeId();
     inputKeyWord(keywords, id);
@@ -57,8 +62,7 @@ function createImage(url, keywords) {
     }
 }
 
-
-
+// Searching for a keyword the user type/choose
 function searchKey(keyToFind) {
     var allImgs = [];
     for(var key in gKeywords){
@@ -73,9 +77,8 @@ function searchKey(keyToFind) {
     return allImgs;
 }
 
-
-
-
+// Create new input if the user submit new key word
+// else, adding to the keyword count +1
 function inputKeyWord(keysToFind, id) {
     keysToFind.forEach(keyToFind => {
         if (gKeywords[keyToFind]) {
@@ -86,6 +89,7 @@ function inputKeyWord(keysToFind, id) {
     });
 }
 
+// Return image by id
 function getImagesByids(ids) {
     var filterImgs = ids.map(id => {
         for (let i = 0; i < gImgs.length; i++) {
