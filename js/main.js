@@ -22,7 +22,7 @@ function init() {
     gCanvas.addEventListener("touchstart", handleMouseDown, false);
 }
 
-
+// When the user pick a background, the canvas is loaded and get the background the user choose.
 function initMeme(imgUrl) {
     var img = new Image();
     img.src = imgUrl;
@@ -39,7 +39,7 @@ function initMeme(imgUrl) {
     }
 }
 
-
+// Draws all the canvas elements the users already made
 function drawCanvas() {
     var meme = getMeme();
     gCtx.drawImage(meme.selectedImg, 0, 0, gCanvas.width, gCanvas.height);
@@ -139,7 +139,7 @@ function onDeleteInput() {
             } else if (getInputTxtCount() <= 0) {
                 gCleare = true;
             }
-        } if (getEmojisCount() > 0) {
+        } else if (getEmojisCount() > 0) {
             deletEmoji(gCurrentInput.id);
             gCurrentInput = meme.txts[0];
             initEditMenu();

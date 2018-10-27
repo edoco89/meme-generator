@@ -44,9 +44,11 @@ main{
       font-size: 16px;
     }
   }
+
 h1{
     margin: 0;
 }
+
 .top-bar {
     height: 48px;
     background-color: rgb(47, 54, 48);
@@ -322,7 +324,7 @@ canvas {
     margin-top: 20px;
 }
 
-.btn-txt-chose{
+.btn-txt-choose{
     border: 0;
     /* border-radius: 50%; */
     width: 40px;
@@ -335,7 +337,7 @@ canvas {
 .btn-clear{
     width: 50px;
 }
-.btn-txt-chose:hover{
+.btn-txt-choose:hover{
     background-color: #2eb398;
     cursor: pointer;
 }
