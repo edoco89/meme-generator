@@ -56,10 +56,11 @@ function drawCanvas() {
         gCtx.strokeText(text.text, text.x, text.y);
     });
     var emojis = getEmojis();
+    console.log(emojis);
     emojis.forEach(emoji => {
         emoji.width = gCtx.measureText(emoji.emoji).width;
         emoji.height = emoji.size;
-        gCtx.font = `${emoji.size}30px Arial`;
+        gCtx.font = `${emoji.size}px Arial`;
         gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
     });
 }
@@ -69,13 +70,17 @@ function onSetTxt(txt) {
     drawCanvas();
 }
 
-function onEmojiAdd(emojis) {
-    emojis.forEach(emoji => {
-        gCtx.beginPath();
-        gCtx.font = "30px Arial";
-        gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
-        gCtx.stroke();
-    });
+function onEmojiAdd(emoji) {
+    createEmoji(emoji);
+    drawCanvas();
+}
+
+function onEmojiDelete() {
+    deletEmoji(gCurrentInput.id);
+    var meme = getMeme();
+    gCurrentInput = meme.txts[0];
+    initEditMenu();
+    drawCanvas();
 }
 
 
@@ -126,33 +131,33 @@ function onDeleteText() {
 }
 
 function onTextSizeUp() {
-    if (gCurrentInput.size < 101){
+    if (gCurrentInput.size < 101) {
         gCurrentInput.size += 5;
-        setTxtSize(gCurrentInput.id, gCurrentInput.size); 
+        setTxtSize(gCurrentInput.id, gCurrentInput.size);
         drawCanvas();
     }
 }
 
 function onTextSizeDown() {
-    if (gCurrentInput.size > 9){
+    if (gCurrentInput.size > 9) {
         gCurrentInput.size -= 5;
-        setTxtSize(gCurrentInput.id, gCurrentInput.size); 
+        setTxtSize(gCurrentInput.id, gCurrentInput.size);
         drawCanvas();
     }
 }
 
 function onStrokeSizeUp() {
-    if (gCurrentInput.strokeSize <  10){
+    if (gCurrentInput.strokeSize < 10) {
         gCurrentInput.strokeSize += 0.5;
-        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize); 
+        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize);
         drawCanvas();
     }
 }
 
 function onStrokeSizeDown() {
-    if (gCurrentInput.strokeSize >= 0){
+    if (gCurrentInput.strokeSize >= 0) {
         gCurrentInput.strokeSize -= 0.5;
-        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize); 
+        setStrokeSize(gCurrentInput.id, gCurrentInput.strokeSize);
         drawCanvas();
     }
 }
@@ -278,6 +283,7 @@ function handleImage(e) {
 function onBtnEmoji() {
     document.querySelector('.icons-modal').classList.toggle('hide');
 }
+
 function openEmojiModal(ev) {
     document.querySelector('.icons-modal').classList.toggle('open-emojis');
     saveEmojiPos(ev);
@@ -285,10 +291,9 @@ function openEmojiModal(ev) {
 
 function onEmojiClick(emoji) {
     document.querySelector('.icons-modal').classList.toggle('open-emojis');
-    saveEmoji(emoji);
-    var emojis = getEmojis();
-    onEmojiAdd(emojis);
+    onEmojiAdd(emoji);
 }
+
 function closeEmojiModal() {
     document.querySelector('.icons-modal').classList.toggle('open-emojis');
 }
@@ -343,8 +348,8 @@ function handleMouseDown(ev) {
 }
 
 function handleMouseMove(ev) {
-    ev.preventDefault();
     if (gSelectedTextIdx < 0) { return; }
+    ev.preventDefault();
     if (!ev.clientX) {
         gRect = ev.target.getBoundingClientRect();
         gMouseX = parseInt(ev.touches[0].clientX - gRect.left);
