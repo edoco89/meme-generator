@@ -36,7 +36,7 @@
 
 
 
-        <div class="editor-container hide">
+        <div class="editor-container">
             <nav class="edit-menu">
                 <div class="txt-container">
                     <div class="btn-emoji-container">
@@ -54,15 +54,15 @@
 
                     </div>
                     <div class="input-container">
-                        <button class="delete-txt btn-input" onclick="onDeleteText()">❌</button>
+                        <button class="delete-txt btn-input" onclick="onDeleteInput()">❌</button>
                         <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetTxt(this.value)">
                         <button class="add-txt btn-input" onclick="onAddText()">➕</button>
                     </div>
                     <div class="txt-align">
                         <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
                         <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
-                        <button class="txt-size-up" onclick="onTextSizeUp()">A</button>
-                        <button class="txt-size-down" onclick="onTextSizeDown()">a</button>
+                        <button class="txt-size-up" onclick="onInputSizeUp()">A</button>
+                        <button class="txt-size-down" onclick="onInputSizeDown()">a</button>
                         <button class="stroke-size-up" onclick="onStrokeSizeUp()">||</button>
                         <button class="stroke-size-down" onclick="onStrokeSizeDown()">|</button>
                         <!-- <button onclick="onTxtAlign(this.value)" class="txt-align-left" value="left">Left</button>

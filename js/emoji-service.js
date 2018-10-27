@@ -44,3 +44,11 @@ function setEmojiSize(emojiId, size) {
     var emoji = getEmojiById(emojiId);
     emoji.size = size;
 }
+
+function getEmojisCount() {
+    return gEmojiCount;
+}
+
+function initInputEmojisCount() {
+    gEmojiCount = 0;
+}

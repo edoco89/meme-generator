@@ -5,8 +5,8 @@ var gMouseX;
 var gMouseY;
 var gStartX;
 var gStartY;
-var gSelectedTextIdx = -1;
-var gSelectedText;
+var gSelectedInputIdx = -1;
+var gSelectedInput;
 var gCurrentInput;
 var gCleare = false;
 var gRect;
@@ -56,11 +56,10 @@ function drawCanvas() {
         gCtx.strokeText(text.text, text.x, text.y);
     });
     var emojis = getEmojis();
-    console.log(emojis);
     emojis.forEach(emoji => {
         emoji.width = gCtx.measureText(emoji.emoji).width;
         emoji.height = emoji.size;
-        gCtx.font = `${emoji.size}px Arial`;
+        gCtx.font = `${emoji.size}px impact`;
         gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
     });
 }
@@ -87,11 +86,16 @@ function onEmojiDelete() {
 function clearCanvas() {
     var meme = getMeme();
     meme.txts.forEach(() => {
-        onDeleteText();
+        onDeleteInput();
     });
+    var emojis = getEmojis();
+    emojis.forEach(() => {
+        onDeleteInput();
+    })
     var imgBackground = getImgBackground();
     createMeme();
     initInputTxtCount();
+    initInputEmojisCount();
     setImgBackground(imgBackground);
     initEditMenu();
     drawCanvas();
@@ -116,32 +120,49 @@ function onAddText() {
     drawCanvas();
 }
 
-function onDeleteText() {
+function onDeleteInput() {
     if (!gCleare) {
-        if (getInputTxtCount() > 0) {
-            deletText(gCurrentInput.id);
-            var meme = getMeme();
+        var meme = getMeme();
+        if (!gCurrentInput.emoji) {
+            if (getInputTxtCount() > 0) {
+                deletText(gCurrentInput.id);
+                gCurrentInput = meme.txts[0];
+                initEditMenu();
+                onAddText();
+                drawCanvas();
+            } else if (getInputTxtCount() <= 0) {
+                gCleare = true;
+            }
+        } if (getEmojisCount() > 0) {
+            deletEmoji(gCurrentInput.id);
             gCurrentInput = meme.txts[0];
             initEditMenu();
-            onAddText();
-        } else if (getInputTxtCount() <= 0) {
-            gCleare = true;
+            drawCanvas();
         }
     }
 }
 
-function onTextSizeUp() {
+function onInputSizeUp() {
     if (gCurrentInput.size < 101) {
         gCurrentInput.size += 5;
-        setTxtSize(gCurrentInput.id, gCurrentInput.size);
+        if (!gCurrentInput.emoji) {
+            setTxtSize(gCurrentInput.id, gCurrentInput.size);
+        } else {
+            setEmojiSize(gCurrentInput.id, gCurrentInput.size)
+        }
         drawCanvas();
     }
 }
 
-function onTextSizeDown() {
+
+function onInputSizeDown() {
     if (gCurrentInput.size > 9) {
         gCurrentInput.size -= 5;
-        setTxtSize(gCurrentInput.id, gCurrentInput.size);
+        if (!gCurrentInput.emoji) {
+            setTxtSize(gCurrentInput.id, gCurrentInput.size);
+        } else {
+            setEmojiSize(gCurrentInput.id, gCurrentInput.size)
+        }
         drawCanvas();
     }
 }
@@ -251,10 +272,11 @@ function initEditMenu() {
 function onGalleryClick() {
     var meme = getMeme();
     meme.txts.forEach(() => {
-        onDeleteText();
+        onDeleteInput();
     });
     var imgBackground = getImgBackground();
     initInputTxtCount();
+    initInputEmojisCount();
     createMeme();
     initMeme(imgBackground.src);
     initEditMenu();
@@ -321,7 +343,6 @@ function onTxtAlign(align) {
 }
 
 function handleMouseDown(ev) {
-    // ev.preventDefault();
     if (!ev.clientX) {
         gRect = ev.target.getBoundingClientRect();
         gStartX = parseInt(ev.touches[0].clientX - gRect.left);
@@ -334,8 +355,8 @@ function handleMouseDown(ev) {
     var texts = meme.txts;
     for (var i = 0; i < texts.length; i++) {
         if (textHitTest(texts[i], gStartX, gStartY)) {
-            gSelectedText = texts[i].text;
-            gSelectedTextIdx = i;
+            gSelectedInput = texts[i].text;
+            gSelectedInputIdx = i;
             gCurrentInput = texts[i];
             setTxtCords(gCurrentInput.id, gCurrentInput.x, gCurrentInput.y);
             document.querySelector('.input-txt-editor').value = gCurrentInput.text;
@@ -343,12 +364,25 @@ function handleMouseDown(ev) {
             document.getElementById('txt-stroke').value = gCurrentInput.stroke;
             drawCanvas();
             break;
-        } else gSelectedTextIdx = -1;
+        } else gSelectedInputIdx = -1;
+    }
+    var emojis = getEmojis();
+    for (var i = 0; i < emojis.length; i++) {
+        if (textHitTest(emojis[i], gStartX, gStartY)) {
+            gSelectedInputIdx = i;
+            gCurrentInput = emojis[i];
+            setEmojiCords(gCurrentInput.id, gCurrentInput.x, gCurrentInput.y);
+            document.querySelector('.input-txt-editor').value = gCurrentInput.emoji;
+            document.getElementById('txt-color').value = '#ffffff';
+            document.getElementById('txt-stroke').value = '#000000';
+            drawCanvas();
+            break;
+        }
     }
 }
 
 function handleMouseMove(ev) {
-    if (gSelectedTextIdx < 0) { return; }
+    if (gSelectedInputIdx < 0) { return; }
     ev.preventDefault();
     if (!ev.clientX) {
         gRect = ev.target.getBoundingClientRect();
@@ -358,34 +392,41 @@ function handleMouseMove(ev) {
         gMouseX = parseInt(ev.clientX - gCanvas.offsetLeft);
         gMouseY = parseInt(ev.clientY - gCanvas.offsetTop);
     }
-    var meme = getMeme();
     var dx = gMouseX - gStartX;
     var dy = gMouseY - gStartY;
     gStartX = gMouseX;
     gStartY = gMouseY;
-    var texts = meme.txts;
-    var text = texts[gSelectedTextIdx];
-    gCurrentInput = text;
-    text.x += dx;
-    text.y += dy;
-    setTxtCords(text.id, text.x, text.y);
+    if (!gCurrentInput.emoji) {
+        var meme = getMeme();
+        var texts = meme.txts;
+        var text = texts[gSelectedInputIdx];
+        gCurrentInput = text;
+        text.x += dx;
+        text.y += dy;
+        setTxtCords(text.id, text.x, text.y);
+    } else {
+        var emojis = getEmojis();
+        var emoji = emojis[gSelectedInputIdx];
+        gCurrentInput = emoji;
+        emoji.x += dx;
+        emoji.y += dy;
+        setEmojiCords(emoji.id, emoji.x, emoji.y);
+    }
     drawCanvas();
 }
 
-function textHitTest(text, x, y) {
-    return (x >= text.x &&
-        x <= text.x + text.width &&
-        y >= text.y - text.height &&
-        y <= text.y);
+function textHitTest(input, x, y) {
+    return (x >= input.x &&
+        x <= input.x + input.width &&
+        y >= input.y - input.height &&
+        y <= input.y);
 }
 
 
 function handleMouseUp(ev) {
-    // ev.preventDefault();
-    gSelectedTextIdx = -1;
+    gSelectedInputIdx = -1;
 }
 
 function handleMouseOut(ev) {
-    // ev.preventDefault();
-    gSelectedTextIdx = -1;
+    gSelectedInputIdx = -1;
 }
