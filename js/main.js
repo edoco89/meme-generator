@@ -42,11 +42,8 @@ function initMeme(imgUrl) {
 
 function drawCanvas() {
     var meme = getMeme();
-    var emojis = getEmojis();
     gCtx.drawImage(meme.selectedImg, 0, 0, gCanvas.width, gCanvas.height);
     meme.txts.forEach(text => {
-        text.width = gCtx.measureText(text.text).width;
-        text.height = text.size;
         gCtx.strokeStyle = text.stroke;
         gCtx.fillStyle = text.color;
         gCtx.textAlign = text.align;
@@ -54,12 +51,15 @@ function drawCanvas() {
         gCtx.lineWidth = text.strokeSize;
         gCtx.fillText(text.text, text.x, text.y);
         gCtx.strokeText(text.text, text.x, text.y);
+        text.width = gCtx.measureText(text.text).width;
+        text.height = text.size;
     });
+    var emojis = getEmojis();
     emojis.forEach(emoji => {
-        emoji.width = gCtx.measureText(emoji.emoji).width;
-        emoji.height = emoji.size;
         gCtx.font = `${emoji.size}px impact`;
         gCtx.fillText(emoji.emoji, emoji.x, emoji.y);
+        emoji.width = emoji.size;
+        emoji.height = emoji.size;
     });
 }
 
@@ -76,8 +76,8 @@ function onEmojiAdd(emoji) {
     createEmoji(emoji);
     var emojis = getEmojis();
     gCurrentInput = emojis[getEmojisCount() - 1];
-    drawCanvas();
     document.querySelector('.input-txt-editor').value = gCurrentInput.emoji;
+    drawCanvas();
 }
 
 function onEmojiDelete() {
@@ -154,7 +154,7 @@ function onInputSizeUp() {
         if (!gCurrentInput.emoji) {
             setTxtSize(gCurrentInput.id, gCurrentInput.size);
         } else {
-            setEmojiSize(gCurrentInput.id, gCurrentInput.size)
+            setEmojiSize(gCurrentInput.id, gCurrentInput.size);
         }
         drawCanvas();
     }
@@ -167,7 +167,7 @@ function onInputSizeDown() {
         if (!gCurrentInput.emoji) {
             setTxtSize(gCurrentInput.id, gCurrentInput.size);
         } else {
-            setEmojiSize(gCurrentInput.id, gCurrentInput.size)
+            setEmojiSize(gCurrentInput.id, gCurrentInput.size);
         }
         drawCanvas();
     }
@@ -399,16 +399,16 @@ function handleMouseMove(ev) {
         var texts = meme.txts;
         var text = texts[gSelectedInputIdx];
         gCurrentInput = text;
-        text.x += dx;
-        text.y += dy;
-        setTxtCords(text.id, text.x, text.y);
+        gCurrentInput.x += dx;
+        gCurrentInput.y += dy;
+        setTxtCords(gCurrentInput.id, gCurrentInput.x, gCurrentInput.y);
     } else if (gCurrentInput.emoji) {
         var emojis = getEmojis();
         var emoji = emojis[gSelectedInputIdx];
         gCurrentInput = emoji;
-        emoji.x += dx;
-        emoji.y += dy;
-        setEmojiCords(emoji.id, emoji.x, emoji.y);
+        gCurrentInput.x += dx;
+        gCurrentInput.y += dy;
+        setEmojiCords(gCurrentInput.id, gCurrentInput.x, gCurrentInput.y);
     }
     drawCanvas();
 }
