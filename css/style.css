@@ -421,6 +421,7 @@ canvas {
     cursor: pointer;
 }
 .btn-imp{
+    text-decoration: none;
     border-radius: 4px;
     border: 0;
     margin: 20px;
