@@ -52,3 +52,8 @@ function getEmojisCount() {
 function initInputEmojisCount() {
     gEmojiCount = 0;
 }
+
+function setImoji(emojiId, emoji) {
+    var emoji = getEmojiById(emojiId);
+    emoji.emoji = emoji;
+}

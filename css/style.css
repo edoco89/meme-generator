@@ -23,6 +23,11 @@ input {
 textarea:focus, input:focus, button:focus{
     outline: none;
 }
+
+main{
+    display: flex;
+    justify-content: center;
+}
 .canvas-container {
     width: 99vw;
    }
@@ -74,38 +79,48 @@ h1{
     width: 100%;
     flex-direction: column;
     position: fixed;
-    top: 100px;
+    top: 48px;
     text-align: center;
     display: none;
+    z-index: 1;
 }
+@media screen and (min-width: 430px) {
+    .btn-top-container{
+        top: 100px;
+    }
+}
+
 .open-btn{
     display: flex;
 
 }
 .btn-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     color: white;
-    margin-left: 10px;
     font-size: 20px;
+    height: 50px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .btn-top:hover{
-    color: rgb(47, 54, 48);
-
+    background-color: rgb(47, 54, 48);
+    cursor: pointer;
 }
 @media screen and (min-width: 430px) {
 
-.logo-top{
-    color: #2eb398;
-    font-size: 45px;
-    font-family: cursive;
-}
-.top-bar{
-    height: 100px;
-}
-.btn-hamburger{
-    font-size: 40px;
-}
+    .logo-top{
+        color: #2eb398;
+        font-size: 45px;
+        font-family: cursive;
+    }
+    .top-bar{
+        height: 100px;
+    }
+    .btn-hamburger{
+        font-size: 40px;
+    }
 
 }
 @media screen and (min-width: 700px) {
@@ -119,6 +134,10 @@ h1{
         width: initial;
 
     }
+    .btn-top{
+        margin-left: 10px;
+    }
+
     .btn-top:hover{
         color: #2eb398;
     }
@@ -232,7 +251,7 @@ canvas {
 
 .edit-menu{
     display: flex;
-    height: 51vh;
+    padding: 10px;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -261,6 +280,7 @@ canvas {
 
 .bts-imp-container{
     display: flex;
+    justify-content: space-around;
 }
 
 .img-btn{
@@ -290,6 +310,36 @@ canvas {
 .btn-input:hover{
     background-color: #2eb398;
 }
+.txt-align{
+    width: 366px;
+    text-align: center;
+    background-color: #58e2c7;
+    border-radius: 30px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.btn-txt-chose{
+    border: 0;
+    /* border-radius: 50%; */
+    width: 40px;
+    height: 40px;
+    margin-left: 7px; 
+    font-size: 16px;
+    font-weight: bold;
+    background: none;
+}
+.btn-clear{
+    width: 50px;
+}
+.btn-txt-chose:hover{
+    background-color: #2eb398;
+    cursor: pointer;
+}
+
 /* modal icons */
 .icons-modal{
     display: flex;
@@ -307,7 +357,7 @@ canvas {
     font-size: 35px;
 }
 
-@media screen and (min-width: 1077px) {
+@media screen and (min-width: 960px) {
     .editor-container{
         display: flex;
         flex-direction: row;
@@ -348,11 +398,19 @@ canvas {
     margin: 20px;
     width: 80px;
     height: 55px;
-    background-image: -moz-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
-    background-image: -webkit-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
-    background-image: -ms-linear-gradient( 90deg, rgb(215,215,215) 0%, rgb(167,167,167) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: rgb(47, 54, 48);
+    color: #58e2c7;
     font-size: 20px;
     text-align: center;
+}
+
+.btn-imp:hover{
+    background-color: rgb(75, 78, 75);
+    cursor: pointer;
 }
 .hide{
     display: none;

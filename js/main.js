@@ -6,7 +6,6 @@ var gMouseY;
 var gStartX;
 var gStartY;
 var gSelectedInputIdx = -1;
-var gSelectedInput;
 var gCurrentInput;
 var gCleare = false;
 var gRect;
@@ -43,6 +42,7 @@ function initMeme(imgUrl) {
 
 function drawCanvas() {
     var meme = getMeme();
+    var emojis = getEmojis();
     gCtx.drawImage(meme.selectedImg, 0, 0, gCanvas.width, gCanvas.height);
     meme.txts.forEach(text => {
         text.width = gCtx.measureText(text.text).width;
@@ -55,7 +55,6 @@ function drawCanvas() {
         gCtx.fillText(text.text, text.x, text.y);
         gCtx.strokeText(text.text, text.x, text.y);
     });
-    var emojis = getEmojis();
     emojis.forEach(emoji => {
         emoji.width = gCtx.measureText(emoji.emoji).width;
         emoji.height = emoji.size;
@@ -64,14 +63,21 @@ function drawCanvas() {
     });
 }
 
-function onSetTxt(txt) {
-    setText(gCurrentInput.id, txt);
+function onSetInput(input) {
+    if (!gCurrentInput.emoji) {
+        setText(gCurrentInput.id, input);
+    } else {
+        setImoji(gCurrentInput.id, input);
+    }
     drawCanvas();
 }
 
 function onEmojiAdd(emoji) {
     createEmoji(emoji);
+    var emojis = getEmojis();
+    gCurrentInput = emojis[getEmojisCount() - 1];
     drawCanvas();
+    document.querySelector('.input-txt-editor').value = gCurrentInput.emoji;
 }
 
 function onEmojiDelete() {
@@ -306,19 +312,12 @@ function onBtnEmoji() {
     document.querySelector('.icons-modal').classList.toggle('hide');
 }
 
-function openEmojiModal(ev) {
-    document.querySelector('.icons-modal').classList.toggle('open-emojis');
-    saveEmojiPos(ev);
-}
 
 function onEmojiClick(emoji) {
-    document.querySelector('.icons-modal').classList.toggle('open-emojis');
     onEmojiAdd(emoji);
+    document.querySelector('.icons-modal').classList.toggle('hide');
 }
 
-function closeEmojiModal() {
-    document.querySelector('.icons-modal').classList.toggle('open-emojis');
-}
 
 function onTxtColor(color) {
     setTxtColor(gCurrentInput.id, color);
@@ -355,7 +354,6 @@ function handleMouseDown(ev) {
     var texts = meme.txts;
     for (var i = 0; i < texts.length; i++) {
         if (textHitTest(texts[i], gStartX, gStartY)) {
-            gSelectedInput = texts[i].text;
             gSelectedInputIdx = i;
             gCurrentInput = texts[i];
             setTxtCords(gCurrentInput.id, gCurrentInput.x, gCurrentInput.y);
@@ -404,7 +402,7 @@ function handleMouseMove(ev) {
         text.x += dx;
         text.y += dy;
         setTxtCords(text.id, text.x, text.y);
-    } else {
+    } else if (gCurrentInput.emoji) {
         var emojis = getEmojis();
         var emoji = emojis[gSelectedInputIdx];
         gCurrentInput = emoji;
