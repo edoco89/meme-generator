@@ -59,19 +59,19 @@
                         <button class="add-txt btn-input" onclick="onAddText()">➕</button>
                     </div>
                     <div class="txt-align">
-                        <input id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
-                        <input id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
-                        <button class="txt-size-up" onclick="onTextSizeUp()">A</button>
-                        <button class="txt-size-down" onclick="onTextSizeDown()">a</button>
-                        <button class="stroke-size-up" onclick="onStrokeSizeUp()">||</button>
-                        <button class="stroke-size-down" onclick="onStrokeSizeDown()">|</button>
+                        <input class="btn-txt-chose" id="txt-color" onchange="onTxtColor(this.value)" type="color" value="#ffffff">
+                        <input class="btn-txt-chose" id="txt-stroke" onchange="onTxtStroke(this.value)" type="color" value="#000000">
+                        <button class="txt-size-up btn-txt-chose" onclick="onTextSizeUp()">Aa+</button>
+                        <button class="txt-size-down btn-txt-chose" onclick="onTextSizeDown()">Aa-</button>
+                        <button class="stroke-size-up btn-txt-chose" onclick="onStrokeSizeUp()">||</button>
+                        <button class="stroke-size-down btn-txt-chose" onclick="onStrokeSizeDown()">|</button>
                         <!-- <button onclick="onTxtAlign(this.value)" class="txt-align-left" value="left">Left</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-center" value="center">Center</button>
                         <button onclick="onTxtAlign(this.value)" class="txt-align-Right" value="right">Right</button> -->
-                        <button class="" id="clear-btn" onclick="clearCanvas()">Clear</button>
+                        <button class="btn-txt-chose btn-clear" id="clear-btn" onclick="clearCanvas()">Clear</button>
                 </div>
                 <div class="bts-imp-container">
-                    <a class="btn-imp" id="save" onclick="saveCanvas(this)">Save Image</a>
+                    <a class="btn-imp" id="save" onclick="saveCanvas(this)">Save</a>
                     <div class="publish-form-container"></div>
                 </div>
             </nav>
