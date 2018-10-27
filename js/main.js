@@ -85,10 +85,10 @@ function clearCanvas() {
         onDeleteInput();
     })
     var imgBackground = getImgBackground();
+    setImgBackground(imgBackground);
     createMeme();
     initTxtCount();
     initEmojisCount();
-    setImgBackground(imgBackground);
     initEditMenu();
     drawCanvas();
 }
@@ -119,7 +119,7 @@ function onDeleteInput() {
             } else if (getTxtCount() <= 0) {
                 gCleare = true;
             }
-        } else if (getEmojisCount() > 0) {
+        } else if (getEmojisCount() >= 0) {
             deletEmoji(gCurrentInput.id);
             gCurrentInput = meme.txts[0];
             initEditMenu();
