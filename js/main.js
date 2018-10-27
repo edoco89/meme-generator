@@ -77,20 +77,20 @@ function drawCanvas() {
 // Clearing the canvas
 function clearCanvas() {
     var meme = getMeme();
+    var emojis = getEmojis();
     meme.txts.forEach(() => {
         onDeleteInput();
     });
-    var emojis = getEmojis();
     emojis.forEach(() => {
         onDeleteInput();
-    })
+    });
     var imgBackground = getImgBackground();
-    setImgBackground(imgBackground);
     createMeme();
+    initMeme(imgBackground.src);
     initTxtCount();
     initEmojisCount();
     initEditMenu();
-    drawCanvas();
+    console.log(meme, emojis);
 }
 
 
@@ -99,32 +99,53 @@ function clearCanvas() {
 // When editin the input text, if emoji, do nothing 
 // (the changes on the emoji won't shown, we dont want to add anything to the emoji).
 function onSetInput(input) {
-    if (!gCurrentInput.emoji) {
+    if (getTxtCount() <= 0) {
+        initTxtCount();
+        onAddText();
         setText(gCurrentInput.id, input);
+        drawCanvas();
+    } else {
+        setText(gCurrentInput.id, input);
+        drawCanvas();
     }
-    drawCanvas();
 }
 
 // Delete the current input
 function onDeleteInput() {
     if (!gCleare) {
         var meme = getMeme();
-        if (!gCurrentInput.emoji) {
+        if (getTxtCount() > 0 && (!gCurrentInput.emoji)) {
             if (getTxtCount() > 0) {
                 deletText(gCurrentInput.id);
-                gCurrentInput = meme.txts[0];
-                initEditMenu();
-                onAddText();
                 drawCanvas();
-            } else if (getTxtCount() <= 0) {
-                gCleare = true;
+                initEditMenu();
+                if (getTxtCount() <= 0) gCurrentInput = getEmojis()[0];
+                else {
+                    onAddText();
+                    meme = getMeme();
+                    gCurrentInput = meme.txts[0];
+                }
             }
-        } else if (getEmojisCount() >= 0) {
-            deletEmoji(gCurrentInput.id);
-            gCurrentInput = meme.txts[0];
-            initEditMenu();
-            drawCanvas();
         }
+        if (getEmojisCount() > 0 && gCurrentInput.emoji) {
+            if (getEmojisCount() > 0) {
+                deletEmoji(gCurrentInput.id);
+                var emojis = getEmojis();
+                drawCanvas();
+                initEditMenu();
+                if (getEmojisCount() <= 0) gCurrentInput = meme.txts[0];
+                else {
+                    gCurrentInput = getEmojis()[0];
+                }
+            }
+        }
+    } else if (getTxtCount() <= 0 && getEmojisCount() <= 0) {
+        initTxtCount();
+        initEmojisCount();
+        onAddText();
+        meme = getMeme();
+        gCurrentInput = getEmojis()[0];
+        gCleare = true;
     }
 }
 

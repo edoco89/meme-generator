@@ -58,7 +58,7 @@ function getTxtCount(){
 
 // Init the lines number to 1
 function initTxtCount() {
-    gTxtCount = 1;
+    gTxtCount = 0;
 }
 
 // Setting image background object
