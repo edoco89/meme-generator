@@ -241,7 +241,7 @@ function onBtnEmoji() {
 // When choosing new emoji, the func adding new emoji, and hide the emoji selection menu
 function onEmojiClick(emoji) {
     onEmojiAdd(emoji);
-    document.querySelector('.icons-modal').classList.toggle('hide');
+    // document.querySelector('.icons-modal').classList.toggle('hide');
 }
 
 // **** GALLERY **** //

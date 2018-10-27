@@ -343,13 +343,18 @@ canvas {
 }
 
 /* modal icons */
+.btn-emoji-container{
+    margin: 17px 0;
+    width: 366px;
+    border-radius: 36px;
+    overflow: hidden;
+
+}
 .icons-modal{
     display: flex;
-}
-.btn-emoji-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    overflow-y: auto;
+    background-color: #58e2c7;
+    height: 64px;
 }
 .emoji{
     font-size: 30px;
@@ -358,6 +363,27 @@ canvas {
 .emoji:hover{
     font-size: 35px;
 }
+/* width */
+::-webkit-scrollbar {
+    height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #58e2c7;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2eb398; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    cursor: pointer;
+}
+
 
 @media screen and (min-width: 960px) {
     .editor-container{
@@ -366,34 +392,34 @@ canvas {
         justify-content: center;
 
     }
-    .icons-modal {
-        width: 343px;
-        height: 60%;
-        position: fixed;
-        top: 101px;
-        left: 371px;
-        text-align: center;
-    }
 }
-
-
-
 
 
 /* contact modal */
 .contact-modal{
     background-color: rgb(47, 54, 48);
     width: 300px;
-    height: 300px;
+    height: 160px;
     color: aliceblue;
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     position: fixed;
     top: 200px;
     left: 30%;
 }
-
+.btn-close-contact{
+    background: none;
+    color: aliceblue;
+    border: 0;
+    font-size: 20px;
+}
+.btn-close-contact:hover{
+    color: #58e2c7;
+    cursor: pointer;
+}
 .btn-imp{
     border-radius: 4px;
     border: 0;

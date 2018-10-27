@@ -39,20 +39,7 @@
         <div class="editor-container hide">
             <nav class="edit-menu">
                 <div class="txt-container">
-                    <div class="btn-emoji-container">
-                        <div class="icons-modal hide">
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
-                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
-                        </div>
-                        <img class="img-btn" onclick="onBtnEmoji()" src="icons-imgs/em-btn.png">
-
-                    </div>
+                   
                     <div class="input-container">
                         <button class="delete-txt btn-input" onclick="onDeleteInput()">❌</button>
                         <input class="input-txt-editor" placeholder="write here..." type="text" oninput="onSetInput(this.value)">
@@ -70,9 +57,34 @@
                         <button onclick="onTxtAlign(this.value)" class="txt-align-Right" value="right">Right</button> -->
                         <button class="btn-txt-choose btn-clear" id="clear-btn" onclick="clearCanvas()">Clear</button>
                 </div>
+
+                <div class="btn-emoji-container">
+                        <div class="icons-modal ">
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍺</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🚀</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💥</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤮</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🐶</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤟</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💩</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤡</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">😍</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🔥</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">❤️</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🥐</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🏁</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🤷</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">🍀</div>
+                            <div onclick="onEmojiClick(this.innerHTML)" class="emoji">💪</div>
+                        </div>
+                        <img class="img-btn hide" onclick="onBtnEmoji()" src="icons-imgs/em-btn.png">
+
+                    </div>
+
                 <div class="bts-imp-container">
                     <a class="btn-imp" id="save" onclick="saveCanvas(this)">Save</a>
                     <div class="publish-form-container"></div>
+                    <div class="share-container"></div>
                 </div>
             </nav>
             <div class="canvas-container">
@@ -82,6 +94,7 @@
         </div>
 
         <div class="contact-modal hide">
+            <button class="btn-close-contact" onclick="onAbout()">&#x2715;</button>
             <h2>Created By Edo Cohen and Tom Manger</h2>
         </div>
 

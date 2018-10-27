@@ -17,7 +17,7 @@ function uploadImg(elForm, ev) {
 
         urlForShare = encodeURIComponent(urlForShare)
         document.querySelector('.share-container').innerHTML = `
-        <a class="w-inline-block social-share-btn fb" href="https://www.facebook.com/sharer/sharer.php?u=${urlForShare}&t=${urlForShare}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgId}&t=${uploadedImgId}'); return false;">
+        <a class="w-inline-block social-share-btn fb btn-imp" href="https://www.facebook.com/sharer/sharer.php?u=${urlForShare}&t=${urlForShare}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgId}&t=${uploadedImgId}'); return false;">
            Share   
         </a>`
     }
@@ -42,7 +42,7 @@ function doUploadImg(elForm, onSuccess) {
 }
 
 function handleImageFromInput(ev, onImageReady) {
-    // document.querySelector('.share-container').innerHTML = ''
+    document.querySelector('.share-container').innerHTML = ''
     var reader = new FileReader();
 
     reader.onload = function (event) {
